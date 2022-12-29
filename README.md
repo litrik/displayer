@@ -26,6 +26,13 @@ Some of its features are:
 
 Displayer is being used successfully in the club house of [korfbalclub KCBJ](https://www.kcbj.be/) to display information about upcoming events, sponsors, live weather etc, without any intervention of the volunteer currently doing bar service.
 
+## Screenshots
+
+![Screenshot](screenshots/screenshot_1.png "Screenshot")
+![Screenshot](screenshots/screenshot_2.png "Screenshot")
+
+[![Watch screen recording](https://img.youtube.com/vi/r9NUL9Qbw-c/0.jpg)](https://www.youtube.com/watch?v=r9NUL9Qbw-c "Watch screen recording")
+
 ## Build and run
 
 There are currently no binary builds available. You have to download/clone the source code and build the app to run it.
@@ -124,3 +131,31 @@ You can always re-enable the original Android TV launcher by entering the follow
 adb shell pm enable com.google.android.tvlauncher
 adb shell pm enable com.google.android.tungsten.setupwraith
 ```
+
+## Built with
+
+ * [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html)
+ * [Compose Desktop](https://www.jetbrains.com/lp/compose-desktop/)
+ * [Kotlin Serialization](https://kotlinlang.org/docs/serialization.html)
+ * [Kotlin Date/Time](https://github.com/Kotlin/kotlinx-datetime)
+ * [Ktor](https://ktor.io/): HTTP server
+ * [Koin](https://github.com/InsertKoinIO/koin): dependency injection framework
+ * [Kamel](https://github.com/alialbaali/Kamel): asynchronous media loading library for Compose
+ * [Kamel](https://github.com/russhwolf/multiplatform-settings): Kotlin Multiplatform library to persist key-value data
+ * [Kermit](https://github.com/touchlab/Kermit): Kotlin Multiplatform logging
+
+# License
+
+    Copyright 2022 Norio BV
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
