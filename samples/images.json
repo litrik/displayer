@@ -1,0 +1,24 @@
+{
+  "center": {
+    "autoAdvanceInSeconds": 3,
+    "items": [
+      {
+        "type": "image",
+        "url": "https://picsum.photos/960/540"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/400/300"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/600/600"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/600/600",
+        "scale": "crop"
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "center": {
+    "items": [
+      {
+        "type": "text",
+        "text": "Ticker Images"
+      }
+    ]
+  },
+  "bottom": {
+    "type": "row",
+    "items": [
+      {
+        "type": "image",
+        "url": "https://picsum.photos/720/720"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/960/540"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/400/150"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/640/480"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/720/720"
+      }
+    ],
+    "divider": {
+      "type": "text",
+      "text": "•"
+    }
+  },
+  "left": {
+    "type": "column",
+    "items": [
+      {
+        "type": "image",
+        "url": "https://picsum.photos/720/720"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/960/540"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/400/150"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/640/480"
+      },
+      {
+        "type": "image",
+        "url": "https://picsum.photos/720/720"
+      }
+    ]
+  }
+}

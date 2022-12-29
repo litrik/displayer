@@ -1,0 +1,76 @@
+{
+  "center": {
+    "styleId": "red-background",
+    "items": [
+      {
+        "type": "text",
+        "text": "Center",
+        "styleId": "light-background"
+      }
+    ]
+  },
+  "bottom": {
+    "type": "row",
+    "styleId": "green-background",
+    "items": [
+      {
+        "type": "text",
+        "text": "Bottom",
+        "styleId": "light-background"
+      },
+      {
+        "type": "text",
+        "text": "One"
+      },
+      {
+        "type": "text",
+        "text": "Two"
+      },
+      {
+        "type": "text",
+        "text": "Three"
+      }
+    ]
+  },
+  "left": {
+    "type": "column",
+    "styleId": "blue-background",
+    "items": [
+      {
+        "type": "text",
+        "text": "Left",
+        "styleId": "light-background"
+      },
+      {
+        "type": "text",
+        "text": "One"
+      },
+      {
+        "type": "text",
+        "text": "Two"
+      },
+      {
+        "type": "text",
+        "text": "Three"
+      }
+    ]
+  },
+  "styles": [
+    {
+      "id": "red-background",
+      "backgroundColor": "#ff0000"
+    },
+    {
+      "id": "green-background",
+      "backgroundColor": "#00ff00"
+    },
+    {
+      "id": "blue-background",
+      "backgroundColor": "#0000ff"
+    },
+    {
+      "id": "light-background",
+      "backgroundColor": "#ffffffa0"
+    }
+  ]
+}

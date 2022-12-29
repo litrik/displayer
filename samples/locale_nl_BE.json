@@ -1,0 +1,13 @@
+{
+  "parameters": {
+    "language": "nl",
+    "country": "BE"
+  },
+  "center": {
+    "items": [
+      {
+        "type": "clock"
+      }
+    ]
+  }
+}

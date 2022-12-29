@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "language": "nl",
+    "country": "BE",
+    "zip": "3130"
+  },
+  "styleId": "light",
+  "center": {
+    "items": [
+      {
+        "type": "weather"
+      }
+    ]
+  },
+  "left": {
+    "type": "column",
+    "styleId": "darker",
+    "items": [
+      {
+        "type": "clock"
+      },
+      {
+        "type": "weather"
+      }
+    ]
+  },
+  "bottom": {
+    "type": "row",
+    "styleId": "dark",
+    "items": [
+      {
+        "type": "text",
+        "text": "Weather"
+      },
+      {
+        "type": "weather"
+      },
+      {
+        "type": "text",
+        "text": "Lorem ipsum dolor sit amet."
+      },
+      {
+        "type": "weather"
+      }
+    ],
+    "divider": {
+      "type": "text",
+      "text": "•"
+    }
+  },
+  "styles": [
+    {
+      "id": "light",
+      "backgroundColor": "#ffffff",
+      "contentColor": "#006699"
+    },
+    {
+      "id": "dark",
+      "backgroundColor": "#006699",
+      "contentColor": "#ffffff"
+    },
+    {
+      "id": "darker",
+      "backgroundColor": "#002233",
+      "contentColor": "#ffffff"
+    }
+  ]
+}
+

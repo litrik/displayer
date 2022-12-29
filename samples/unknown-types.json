@@ -1,0 +1,15 @@
+{
+  "center": {
+    "items": [
+      {
+        "type": "unknown",
+        "text": "unknown"
+      },
+      {
+        "type": "text",
+        "text": "Unknown types are ignored"
+      }
+    ],
+    "autoAdvanceInSeconds": 3
+  }
+}

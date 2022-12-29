@@ -1,0 +1,48 @@
+{
+  "styleId": "black-on-white",
+  "center": {
+    "items": [
+      {
+        "type": "text",
+        "text": "Styling Regions"
+      }
+    ]
+  },
+  "bottom": {
+    "type": "row",
+    "styleId": "white-on-red",
+    "items": [
+      {
+        "type": "text",
+        "text": "Styling"
+      }
+    ]
+  },
+  "left": {
+    "type": "column",
+    "styleId": "white-on-green",
+    "items": [
+      {
+        "type": "text",
+        "text": "Styling"
+      }
+    ]
+  },
+  "styles": [
+    {
+      "id": "black-on-white",
+      "backgroundColor": "#ffffff",
+      "contentColor": "#000000"
+    },
+    {
+      "id": "white-on-red",
+      "backgroundColor": "#cc4444",
+      "contentColor": "#ffffff"
+    },
+    {
+      "id": "white-on-green",
+      "backgroundColor": "#44cc44",
+      "contentColor": "#ffffff"
+    }
+  ]
+}

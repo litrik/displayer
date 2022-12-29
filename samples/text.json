@@ -1,0 +1,15 @@
+{
+  "center": {
+    "autoAdvanceInSeconds": 2,
+    "items": [
+      {
+        "type": "text",
+        "text": "Hello..."
+      },
+      {
+        "type": "text",
+        "text": "...world!"
+      }
+    ]
+  }
+}
