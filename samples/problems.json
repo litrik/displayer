@@ -1,0 +1,37 @@
+{
+  "styleId": "unknown-style",
+  "center": {
+    "items": []
+  },
+  "bottom": {
+    "type": "row",
+    "styleId": "unknown-style",
+    "items": [
+      {
+        "type": "text",
+        "text": "One"
+      },
+      {
+        "type": "unknown-type",
+        "text": "Two"
+      },
+      {
+        "type": "text",
+        "text": "Two",
+        "styleId": "unknown-style"
+      },
+      {
+        "type": "image",
+        "url": "file:///logo.png"
+      },
+      {
+        "type": "random",
+        "items": []
+      }
+    ],
+    "divider": {
+      "type": "unknown-type",
+      "styleId": "unknown-style"
+    }
+  }
+}

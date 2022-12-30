@@ -24,7 +24,7 @@ Some of its features are:
  * Locale-aware (for time formatting, temperature units,...)
  * Is a _launcher_ on Android platforms (including Android TV)
 
-Displayer is being used successfully in the club house of [korfbalclub KCBJ](https://www.kcbj.be/) to display information about upcoming events, sponsors, live weather etc, without any intervention of the volunteer currently doing bar service.
+Displayer is being used successfully in the clubhouse of [korfbalclub KCBJ](https://www.kcbj.be/) to display information about upcoming events, sponsors, and live weather, without any intervention of the volunteer currently doing bar service.
 
 ## Screenshots
 
@@ -55,9 +55,9 @@ Optionally, you can open the project in IntelliJ IDEA (tested with version 2022.
 
 ## Display file structure
 
-Coming soon...
+There are [sample display files](samples/index.md) available showcasing different features.
 
-There are sample display files available in the `samples` directory.
+A detailed explanation of the display file structure is coming soon...
 
 ## Send commands
 
