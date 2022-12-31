@@ -22,4 +22,12 @@ enum class Icon {
     WeatherCloudySnowing,
     WeatherFog,
 
+    // Social
+    Facebook,
+    Instagram,
+    TikTok,
+    YouTubeDark,
+    YouTubeLight,
+    Snapchat,
+
 }

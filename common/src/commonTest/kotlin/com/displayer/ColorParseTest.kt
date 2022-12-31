@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class ColorTest {
+class ColorParseTest {
 
     @Test
     fun parseColorWithoutAlpha() {

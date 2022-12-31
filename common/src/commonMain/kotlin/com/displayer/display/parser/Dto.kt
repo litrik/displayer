@@ -128,6 +128,16 @@ data class DrinkDto(
 ) : ItemDto()
 
 @Serializable
+@SerialName("social")
+data class SocialDto(
+    val app: SocialApp,
+    val account: String,
+    val text: String? = null,
+    override val styleId: String? = null,
+    override val padding: PaddingDto? = null,
+) : ItemDto()
+
+@Serializable
 data class StyleDto(
     val id: String,
     val contentColor: String? = null,
@@ -163,4 +173,21 @@ enum class ScaleDto {
 
     @SerialName("fit")
     Fit,
+}
+
+enum class SocialApp {
+    @SerialName("facebook")
+    Facebook,
+
+    @SerialName("instagram")
+    Instagram,
+
+    @SerialName("tiktok")
+    Tiktok,
+
+    @SerialName("youtube")
+    YouTube,
+
+    @SerialName("snapchat")
+    Snapchat,
 }

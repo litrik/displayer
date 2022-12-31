@@ -1,0 +1,116 @@
+{
+  "center": {
+    "autoAdvanceInSeconds": 5,
+    "styleId": "dark",
+    "items": [
+      {
+        "type": "social",
+        "app": "facebook",
+        "account": "MKBHD",
+        "text": "Follow us on Facebook"
+      },
+      {
+        "type": "social",
+        "app": "instagram",
+        "account": "mkbhd",
+        "text": "Follow us on Instagram"
+      },
+      {
+        "type": "social",
+        "app": "tiktok",
+        "account": "mkbhd",
+        "text": "Follow us on Tiktok"
+      },
+      {
+        "type": "social",
+        "app": "snapchat",
+        "account": "mkbhd",
+        "text": "Follow us on Snapchat"
+      },
+      {
+        "type": "social",
+        "app": "youtube",
+        "account": "mkbhd",
+        "text": "Like and subscribe"
+      }
+    ]
+  },
+  "left": {
+    "type": "column",
+    "styleId": "medium",
+    "spacing": 4,
+    "padding": {
+      "vertical": 3,
+      "horizontal": 2
+    },
+    "items": [
+      {
+        "type": "social",
+        "app": "instagram",
+        "account": "mkbhd"
+      },
+      {
+        "type": "social",
+        "app": "snapchat",
+        "account": "mkbhd"
+      }
+    ]
+  },
+  "bottom": {
+    "type": "row",
+    "styleId": "light",
+    "items": [
+      {
+        "type": "social",
+        "app": "tiktok",
+        "account": "mkbhd",
+        "text": "Follow us on Tiktok"
+      },
+      {
+        "type": "social",
+        "app": "youtube",
+        "account": "mkbhd",
+        "text": "Like and subscribe"
+      },
+      {
+        "type": "social",
+        "app": "facebook",
+        "account": "MKBHD",
+        "text": "Follow us on Facebook"
+      },
+      {
+        "type": "social",
+        "app": "snapchat",
+        "account": "mkbhd",
+        "text": "Follow us on Snapchat"
+      },
+      {
+        "type": "social",
+        "app": "instagram",
+        "account": "mkbhd",
+        "text": "Follow us on Instagram"
+      }
+    ],
+    "divider": {
+      "type": "text",
+      "text": "―"
+    }
+  },
+  "styles": [
+    {
+      "id": "dark",
+      "backgroundColor": "#000000",
+      "contentColor": "#ffffff"
+    },
+    {
+      "id": "light",
+      "backgroundColor": "#ffffff",
+      "contentColor": "#000000"
+    },
+    {
+      "id": "medium",
+      "backgroundColor": "#448844",
+      "contentColor": "#ffffff"
+    }
+  ]
+}

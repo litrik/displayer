@@ -26,6 +26,7 @@ fun ItemUi(item: Item) {
                 is RandomItem -> RandomItemUi(item)
                 is Weather -> WeatherUi(item)
                 is DrinkItem -> DrinkItemUi(item)
+                is SocialItem -> SocialItemUi(item)
             }
         }
     }

@@ -26,10 +26,16 @@ actual fun getIcon(icon: Icon): Painter = painterResource(
         Icon.WeatherThunderstorm -> R.drawable.weather_thunderstorm
         Icon.WeatherCloudySnowing -> R.drawable.weather_cloudy_snowing
         Icon.WeatherFog -> R.drawable.weather_fog
+        Icon.Facebook -> R.drawable.social_facebook
+        Icon.Instagram -> R.drawable.social_instagram
+        Icon.TikTok -> R.drawable.social_tiktok
+        Icon.YouTubeDark -> R.drawable.social_youtube_dark
+        Icon.YouTubeLight -> R.drawable.social_youtube_light
+        Icon.Snapchat -> R.drawable.social_snapchat
     }
 )
 
-actual fun formatTime(instant: Instant, locale : Locale): String {
+actual fun formatTime(instant: Instant, locale: Locale): String {
     val df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT, java.util.Locale.forLanguageTag(locale.toLanguageTag()))
     return df.format(Date(instant.toEpochMilliseconds()))
 }

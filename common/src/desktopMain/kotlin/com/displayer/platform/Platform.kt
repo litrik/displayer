@@ -25,6 +25,12 @@ actual fun getIcon(icon: Icon): Painter = painterResource(
         Icon.WeatherThunderstorm -> "weather_thunderstorm.svg"
         Icon.WeatherCloudySnowing -> "weather_cloudy_snowing.svg"
         Icon.WeatherFog -> "weather_fog.svg"
+        Icon.Facebook -> "social_facebook.png"
+        Icon.Instagram -> "social_instagram.png"
+        Icon.TikTok -> "social_tiktok.png"
+        Icon.YouTubeDark -> "social_youtube_dark.png"
+        Icon.YouTubeLight -> "social_youtube_light.png"
+        Icon.Snapchat -> "social_snapchat.png"
     }
 )
 

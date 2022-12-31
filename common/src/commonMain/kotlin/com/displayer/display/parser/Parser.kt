@@ -14,6 +14,7 @@ import com.displayer.display.item.DrinkItem
 import com.displayer.display.item.Image
 import com.displayer.display.item.Item
 import com.displayer.display.item.RandomItem
+import com.displayer.display.item.SocialItem
 import com.displayer.display.item.TextItem
 import com.displayer.display.item.UnknownItem
 import com.displayer.display.item.Weather
@@ -53,6 +54,7 @@ object Parser {
             is TextDto -> TextItem(style = resolveStyle(dto.styleId, context), padding = parsePadding(dto.padding), text = dto.text)
             is WeatherDto -> Weather(style = resolveStyle(dto.styleId, context), padding = parsePadding(dto.padding), observeCurrentWeather = observeCurrentWeather)
             is DrinkDto -> DrinkItem(style = resolveStyle(dto.styleId, context), padding = parsePadding(dto.padding), image = dto.image, text = dto.text)
+            is SocialDto -> SocialItem(style = resolveStyle(dto.styleId, context), padding = parsePadding(dto.padding), app = dto.app, account = dto.account, text = dto.text)
         }.run {
             val messages = mutableListOf<Message>()
             if (this is UnknownItem) {

@@ -58,6 +58,11 @@ Live weather data for Betekom, Belgium, showing temperature in degrees Celsius a
 Live weather data for Rochester, Minnesota, US, showing temperature in degrees Fahrenheit and wind speeds in mph (in English).
 ![Screenshot](weather_rochester_MN.png "Screenshot")
 
+## Social media
+
+### [socials.json](socials.json)
+![Screenshot](socials.png "Screenshot")
+
 ## Errors
 
 ### [not-json.txt](json.json)
