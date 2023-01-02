@@ -97,7 +97,7 @@ class DisplayRepo(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    suspend fun loadDisplay(stream: InputStream) {
+    fun loadDisplay(stream: InputStream) {
         stream.use {
             val messages = mutableListOf<Message>()
             try {
@@ -195,7 +195,7 @@ class DisplayRepo(
                 center = center,
                 left = left,
                 bottom = bottom,
-                bottomHeight = if (left.items.isEmpty() && bottom.items.isEmpty()) 0f else (dto.bottomHeight ?: Display.Companion.DEFAULT_BOTTOM_HEIGHT)
+                bottomHeight = if (left.items.isEmpty() && bottom.items.isEmpty()) 0f else (dto.bottomHeight ?: Display.DEFAULT_BOTTOM_HEIGHT)
             ),
             messages = messages,
         )

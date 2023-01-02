@@ -62,7 +62,7 @@ fun AdminPanel(state: AppState) {
 
                     SectionTitle(Strings.adminSectionDisplay.toString())
                     state.displayState.url?.run { Text("${Strings.adminLabelUrl}: $this") }
-                    Column() {
+                    Column {
                         state.displayState.messages.onEach {
                             Message(
                                 message = it,

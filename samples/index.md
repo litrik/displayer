@@ -65,7 +65,7 @@ Live weather data for Rochester, Minnesota, US, showing temperature in degrees F
 
 ## Errors
 
-### [not-json.txt](json.json)
+### [not-json.txt](not-json.txt)
 Invalid JSON
 ![Screenshot](not-json.png "Screenshot")
 

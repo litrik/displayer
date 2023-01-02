@@ -14,7 +14,7 @@ data class Display(
     val bottomHeight: Float,
 ) {
     companion object {
-        val DEFAULT_BOTTOM_HEIGHT: Float = 6f
+        const val DEFAULT_BOTTOM_HEIGHT: Float = 6f
     }
 
 }
