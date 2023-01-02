@@ -2,14 +2,16 @@ package com.displayer.display.item
 
 import androidx.compose.runtime.Composable
 import co.touchlab.kermit.Logger
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlin.random.Random
 
 data class RandomItem(
     val items: ImmutableList<Item> = persistentListOf(),
-    override val style: com.displayer.display.Style? = null,
-    override val padding: com.displayer.display.Padding = com.displayer.display.Padding(),
+    override val style: Style? = null,
+    override val padding: Padding = Padding(),
 ) : Item()
 
 @Composable

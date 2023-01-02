@@ -37,10 +37,10 @@ class DisplayRepo(
     private val json: Json,
 ) {
 
-    private val state = MutableStateFlow<com.displayer.display.DisplayState>(com.displayer.display.DisplayState.NoDisplay)
+    private val state = MutableStateFlow<DisplayState>(DisplayState.NoDisplay)
     private var refreshJob: Job? = null
 
-    fun observeState(): Flow<com.displayer.display.DisplayState> = state
+    fun observeState(): Flow<DisplayState> = state
 
     suspend fun loadDisplay(url: String?, refreshDelayInMinutes: Int = 0) {
         if (refreshDelayInMinutes == 0) {
@@ -54,7 +54,7 @@ class DisplayRepo(
             if (rememberedFile != null) {
                 Logger.i { "Initializing Displayer with remembered display" }
                 val display = parseDisplayFile(rememberedFile).andReport(messages)
-                state.value = com.displayer.display.DisplayState.Success(
+                state.value = DisplayState.Success(
                     messages = messages.toImmutableList(),
                     display = display,
                     url = null,
@@ -62,8 +62,8 @@ class DisplayRepo(
             } else {
                 Logger.i { "Initializing Displayer with default display" }
                 messages.add(Message(Severity.Info, "Using default display"))
-                val display = parseDisplayFile(com.displayer.display.defaultDisplayFile).andReport(messages)
-                state.value = com.displayer.display.DisplayState.Success(
+                val display = parseDisplayFile(defaultDisplayFile).andReport(messages)
+                state.value = DisplayState.Success(
                     messages = messages.toImmutableList(),
                     display = display,
                 )
@@ -82,7 +82,7 @@ class DisplayRepo(
                 val display = parseDisplayFile(file).andReport(messages)
                 configRepo.setDisplayUrl(actualUrl)
                 actualRefreshDelayInMinutes = display.refreshInMinutes
-                state.value = com.displayer.display.DisplayState.Success(
+                state.value = DisplayState.Success(
                     messages = messages.toImmutableList(),
                     display = display,
                     url = actualUrl,
@@ -90,7 +90,7 @@ class DisplayRepo(
             } catch (e: Exception) {
                 Logger.e("Failed to parse the display file", e)
                 messages.add(Message(Severity.Error, "Failed to parse the display file: ${e.javaClass.simpleName}\n${e.message.orEmpty()}"))
-                state.value = com.displayer.display.DisplayState.Failure(actualUrl, messages.toImmutableList())
+                state.value = DisplayState.Failure(actualUrl, messages.toImmutableList())
             }
             scheduleRefresh(actualUrl, actualRefreshDelayInMinutes)
         }
@@ -104,7 +104,7 @@ class DisplayRepo(
                 val file: DisplayFile = json.decodeFromStream(it)
                 val display = parseDisplayFile(file).andReport(messages)
                 configRepo.setDisplayFile(file)
-                state.value = com.displayer.display.DisplayState.Success(
+                state.value = DisplayState.Success(
                     messages = messages.toImmutableList(),
                     display = display,
                     url = null,
@@ -129,7 +129,7 @@ class DisplayRepo(
         }
     }
 
-    private fun parseDisplayFile(dto: DisplayFile): Result<com.displayer.display.Display> {
+    private fun parseDisplayFile(dto: DisplayFile): Result<Display> {
         Logger.i("Parsing display file")
         val messages = mutableListOf<Message>()
 
@@ -188,20 +188,20 @@ class DisplayRepo(
         }
 
         return Result(
-            data = com.displayer.display.Display(
+            data = Display(
                 locale = Locale("${parameters.language}-${parameters.country}"),
                 refreshInMinutes = dto.parameters?.refreshInMinutes ?: 0,
-                style = style ?: com.displayer.display.defaultStyle,
+                style = style ?: defaultStyle,
                 center = center,
                 left = left,
                 bottom = bottom,
-                bottomHeight = if (left.items.isEmpty() && bottom.items.isEmpty()) 0f else (dto.bottomHeight ?: com.displayer.display.Display.Companion.DEFAULT_BOTTOM_HEIGHT)
+                bottomHeight = if (left.items.isEmpty() && bottom.items.isEmpty()) 0f else (dto.bottomHeight ?: Display.Companion.DEFAULT_BOTTOM_HEIGHT)
             ),
             messages = messages,
         )
     }
 
-    private fun resolveStyle(styleId: String?, context: String, allStyles: List<com.displayer.display.Style>): Result<com.displayer.display.Style?> {
+    private fun resolveStyle(styleId: String?, context: String, allStyles: List<Style>): Result<Style?> {
         val messages = mutableListOf<Message>()
         val style = allStyles.firstOrNull { it.id == styleId }.also {
             if (styleId != null && it == null) {

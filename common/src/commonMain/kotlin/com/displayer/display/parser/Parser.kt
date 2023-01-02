@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import com.displayer.config.Parameters
 import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.display.container.ColumnLayout
 import com.displayer.display.container.Container
 import com.displayer.display.container.Empty
@@ -25,8 +26,8 @@ import kotlinx.coroutines.flow.Flow
 
 object Parser {
 
-    fun parseStyle(dto: StyleDto): Result<com.displayer.display.Style> = Result(
-        com.displayer.display.Style(
+    fun parseStyle(dto: StyleDto): Result<Style> = Result(
+        Style(
             id = dto.id,
             backgroundColor = dto.backgroundColor?.let { Color.parse(it) } ?: Color.Unspecified,
             contentColor = dto.contentColor?.let { Color.parse(it) } ?: Color.Unspecified,
@@ -35,7 +36,7 @@ object Parser {
     private fun parseItem(
         dto: ItemDto,
         context: String,
-        resolveStyle: (styleId: String?, context: String) -> com.displayer.display.Style?,
+        resolveStyle: (styleId: String?, context: String) -> Style?,
         observeCurrentWeather: () -> Flow<List<WeatherData>>
     ): Result<Item> =
         when (dto) {
@@ -67,12 +68,12 @@ object Parser {
             Result(this, messages)
         }
 
-    private fun parsePadding(dto: PaddingDto?): com.displayer.display.Padding = com.displayer.display.Padding(horizontal = dto?.horizontal ?: 0f, vertical = dto?.vertical ?: 0f)
+    private fun parsePadding(dto: PaddingDto?): Padding = Padding(horizontal = dto?.horizontal ?: 0f, vertical = dto?.vertical ?: 0f)
 
     private fun parseItems(
         dtos: List<ItemDto>?,
         context: String,
-        resolveStyle: (String?, String) -> com.displayer.display.Style?,
+        resolveStyle: (String?, String) -> Style?,
         observeCurrentWeather: () -> Flow<List<WeatherData>>
     ): Result<List<Item>> {
         val messages = mutableListOf<Message>()
@@ -111,7 +112,7 @@ object Parser {
     fun parseContainer(
         dto: ContainerDto?,
         context: String,
-        resolveStyle: (String?, String) -> com.displayer.display.Style?,
+        resolveStyle: (String?, String) -> Style?,
         observeCurrentWeather: () -> Flow<List<WeatherData>>,
         required: Boolean = false,
     ): Result<Container> {
@@ -141,7 +142,7 @@ object Parser {
                 val scrollSpeedInSeconds = dto.scrollSpeedInSeconds ?: ColumnLayout.DEFAULT_SCROLL_SPEED
 
                 ColumnLayout(
-                    padding = dto.padding?.let { com.displayer.display.Padding(it.horizontal, it.vertical) }
+                    padding = dto.padding?.let { Padding(it.horizontal, it.vertical) }
                         ?: (if (scrollSpeedInSeconds > 0) ColumnLayout.DEFAULT_PADDING_SCROLLING else ColumnLayout.DEFAULT_PADDING_STATIC),
                     style = style,
                     items = injectDivider(items, dto.divider?.let {
@@ -155,7 +156,7 @@ object Parser {
             is RowDto -> {
                 val scrollSpeedInSeconds = dto.scrollSpeedInSeconds ?: RowLayout.DEFAULT_SCROLL_SPEED
                 RowLayout(
-                    padding = dto.padding?.let { com.displayer.display.Padding(it.horizontal, it.vertical) }
+                    padding = dto.padding?.let { Padding(it.horizontal, it.vertical) }
                         ?: (if (scrollSpeedInSeconds > 0) RowLayout.DEFAULT_PADDING_SCROLLING else RowLayout.DEFAULT_PADDING_STATIC),
                     style = style,
                     items = injectDivider(items, dto.divider?.let {

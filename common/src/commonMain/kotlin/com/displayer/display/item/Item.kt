@@ -4,12 +4,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.ui.LocalDimensions
 import com.displayer.ui.StyledContent
 
 sealed class Item {
-    abstract val style: com.displayer.display.Style?
-    abstract val padding: com.displayer.display.Padding
+    abstract val style: Style?
+    abstract val padding: Padding
 }
 
 @Composable

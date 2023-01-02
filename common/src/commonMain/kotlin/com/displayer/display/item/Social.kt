@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.display.parser.SocialApp
 import com.displayer.isLight
 import com.displayer.platform.getIcon
@@ -29,8 +31,8 @@ data class SocialItem(
     val app: SocialApp,
     val account: String,
     val text: String?,
-    override val style: com.displayer.display.Style? = null,
-    override val padding: com.displayer.display.Padding = com.displayer.display.Padding(),
+    override val style: Style? = null,
+    override val padding: Padding = Padding(),
 ) : Item()
 
 @Composable

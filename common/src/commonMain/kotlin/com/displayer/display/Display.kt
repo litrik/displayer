@@ -7,7 +7,7 @@ import com.displayer.display.container.Container
 data class Display(
     val locale : Locale,
     val refreshInMinutes: Int = 0,
-    val style: com.displayer.display.Style,
+    val style: Style,
     val center: Container,
     val left: Container,
     val bottom: Container,
@@ -25,7 +25,7 @@ data class Style(
     val contentColor: Color,
 )
 
-val defaultStyle = com.displayer.display.Style(
+val defaultStyle = Style(
     id = "displayer.style.dark",
     backgroundColor = Color.Black,
     contentColor = Color.White,

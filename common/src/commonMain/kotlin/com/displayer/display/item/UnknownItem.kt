@@ -1,10 +1,12 @@
 package com.displayer.display.item
 
 import androidx.compose.runtime.Composable
+import com.displayer.display.Padding
+import com.displayer.display.Style
 
 data class UnknownItem(
-    override val style: com.displayer.display.Style? = null,
-    override val padding: com.displayer.display.Padding,
+    override val style: Style? = null,
+    override val padding: Padding,
 ) : Item()
 
 @Composable

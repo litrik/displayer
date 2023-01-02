@@ -18,7 +18,7 @@ import com.displayer.ui.LocalStyle
 import com.displayer.ui.StyledContent
 
 @Composable
-fun MainUi(display: com.displayer.display.Display) {
+fun MainUi(display: Display) {
     with(display) {
         CompositionLocalProvider(LocalLocale provides (display.locale)) {
             StyledContent(style) {

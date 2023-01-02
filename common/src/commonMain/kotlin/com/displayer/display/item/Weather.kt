@@ -20,6 +20,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.platform.formatTime
 import com.displayer.platform.getIcon
 import com.displayer.toSp
@@ -38,8 +40,8 @@ import kotlin.math.roundToInt
 
 data class Weather(
     val observeCurrentWeather: () -> Flow<List<WeatherData>>,
-    override val style: com.displayer.display.Style? = null,
-    override val padding: com.displayer.display.Padding,
+    override val style: Style? = null,
+    override val padding: Padding,
 ) : Item()
 
 @Composable

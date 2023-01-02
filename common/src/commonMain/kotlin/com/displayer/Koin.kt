@@ -3,6 +3,7 @@ package com.displayer
 import com.displayer.app.App
 import com.displayer.config.ConfigRepo
 import com.displayer.config.ParametersRepo
+import com.displayer.display.DisplayRepo
 import com.displayer.display.parser.ContainerDto
 import com.displayer.display.parser.ItemDto
 import com.displayer.display.parser.StackDto
@@ -54,7 +55,7 @@ val coreModule = module {
     single { Settings() }
     single { ParametersRepo() }
     single { ConfigRepo(get(), get()) }
-    single { com.displayer.display.DisplayRepo(get(), get(), get(), get(), get()) }
+    single { DisplayRepo(get(), get(), get(), get(), get()) }
     single { WeatherRepo(get(), get(), get()) }
     single { App(get(), get(), get()) }
 }

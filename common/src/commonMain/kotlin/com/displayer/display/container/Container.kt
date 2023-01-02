@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.display.item.Item
 import com.displayer.ui.Direction
 import com.displayer.ui.LocalDimensions
@@ -21,8 +23,8 @@ sealed class Container(
     val direction: Direction = Direction.None,
     val textAlign: TextAlign = TextAlign.Center,
 ) {
-    abstract val padding: com.displayer.display.Padding
-    abstract val style: com.displayer.display.Style?
+    abstract val padding: Padding
+    abstract val style: Style?
     abstract val items: ImmutableList<Item>
 }
 

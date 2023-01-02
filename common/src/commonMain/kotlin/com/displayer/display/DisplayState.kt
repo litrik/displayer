@@ -13,7 +13,7 @@ sealed class DisplayState(
     data class Success(
         override val url: String? = null,
         override val messages: ImmutableList<Message>,
-        val display: com.displayer.display.Display,
+        val display: Display,
     ) : DisplayState(url, messages)
 
     data class Failure(

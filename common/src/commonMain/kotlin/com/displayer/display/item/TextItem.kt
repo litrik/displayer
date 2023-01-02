@@ -14,6 +14,8 @@ import androidx.compose.ui.platform.LocalFontFamilyResolver
 import androidx.compose.ui.text.ParagraphIntrinsics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.toSp
 import com.displayer.ui.Direction
 import com.displayer.ui.LocalDirection
@@ -22,8 +24,8 @@ import com.displayer.ui.LocalTextAlign
 
 data class TextItem(
     val text: String,
-    override val style: com.displayer.display.Style? = null,
-    override val padding: com.displayer.display.Padding = com.displayer.display.Padding(),
+    override val style: Style? = null,
+    override val padding: Padding = Padding(),
 ) : Item()
 
 @Composable

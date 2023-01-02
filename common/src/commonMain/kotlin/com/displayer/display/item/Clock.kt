@@ -6,13 +6,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.platform.formatTime
 import com.displayer.ui.LocalLocale
 import kotlinx.coroutines.delay
 
 data class Clock(
-    override val style: com.displayer.display.Style? = null,
-    override val padding: com.displayer.display.Padding = com.displayer.display.Padding(),
+    override val style: Style? = null,
+    override val padding: Padding = Padding(),
 ) : Item()
 
 @Composable

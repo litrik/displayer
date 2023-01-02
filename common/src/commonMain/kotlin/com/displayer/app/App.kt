@@ -1,6 +1,7 @@
 package com.displayer.app
 
 import com.displayer.config.ConfigRepo
+import com.displayer.display.DisplayRepo
 import com.displayer.weather.WeatherRepo
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +12,7 @@ import java.io.InputStream
 
 class App(
     private val configRepo: ConfigRepo,
-    private val displayRepo: com.displayer.display.DisplayRepo,
+    private val displayRepo: DisplayRepo,
     private val weatherRepo: WeatherRepo,
 ) {
 

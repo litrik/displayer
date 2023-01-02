@@ -15,6 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.displayer.display.Padding
+import com.displayer.display.Style
 import com.displayer.display.item.Item
 import com.displayer.display.item.ItemUi
 import com.displayer.toPx
@@ -24,8 +26,8 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.delay
 
 data class ColumnLayout(
-    override val padding: com.displayer.display.Padding,
-    override val style: com.displayer.display.Style? = null,
+    override val padding: Padding,
+    override val style: Style? = null,
     override val items: ImmutableList<Item>,
     val spacing: Float? = null,
     val scrollSpeedSeconds: Float,
@@ -34,8 +36,8 @@ data class ColumnLayout(
 ) {
 
     companion object {
-        val DEFAULT_PADDING_SCROLLING: com.displayer.display.Padding = com.displayer.display.Padding(1f, 0f)
-        val DEFAULT_PADDING_STATIC: com.displayer.display.Padding = com.displayer.display.Padding(1f, 1f)
+        val DEFAULT_PADDING_SCROLLING: Padding = Padding(1f, 0f)
+        val DEFAULT_PADDING_STATIC: Padding = Padding(1f, 1f)
         const val DEFAULT_SCROLL_SPEED: Float = 0f
     }
 }

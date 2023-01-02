@@ -8,11 +8,13 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.displayer.display.Style
+import com.displayer.display.defaultStyle
 
 val DisplayerPurple = Color(156, 39, 176)
 
 val LocalTextAlign = compositionLocalOf { TextAlign.Left }
-val LocalStyle = compositionLocalOf { com.displayer.display.defaultStyle }
+val LocalStyle = compositionLocalOf { defaultStyle }
 val LocalDirection = compositionLocalOf { Direction.None }
 val LocalDimensions = compositionLocalOf { Dimensions() }
 val LocalLocale = compositionLocalOf { Locale.current }
@@ -44,7 +46,7 @@ data class Dimensions(
 
 @Composable
 fun StyledContent(
-    style: com.displayer.display.Style?,
+    style: Style?,
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(LocalStyle provides (style ?: LocalStyle.current)) {
