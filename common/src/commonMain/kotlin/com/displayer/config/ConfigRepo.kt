@@ -1,6 +1,7 @@
 package com.displayer.config
 
 import co.touchlab.kermit.Logger
+import com.displayer.display.parser.DisplayFile
 import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,8 +34,14 @@ class ConfigRepo(
     fun getDisplayUrl(): String? = configFlow.value.displayUrl
 
     fun setDisplayUrl(url: String) {
-        updateConfig(configFlow.value.copy(displayUrl = url))
+        updateConfig(configFlow.value.copy(displayUrl = url, displayFile = null))
     }
+
+    fun setDisplayFile(file: DisplayFile) {
+        updateConfig(configFlow.value.copy(displayUrl = null, displayFile = file))
+    }
+
+    fun getDisplayFile(): DisplayFile? = configFlow.value.displayFile
 
     companion object {
         const val KEY_CONFIG = "Displayer.Config"

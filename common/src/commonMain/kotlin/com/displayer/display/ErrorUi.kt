@@ -48,20 +48,22 @@ fun ErrorUi(displayFailed: DisplayState.Failure) {
                     Message(it)
                 }
             }
-            Box(
-                modifier = Modifier.fillMaxHeight().fillMaxWidth(0.2f).padding(LocalDimensions.current.baseUnit),
-                contentAlignment = Alignment.BottomCenter,
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+            displayFailed.url?.run {
+                Box(
+                    modifier = Modifier.fillMaxHeight().fillMaxWidth(0.2f).padding(LocalDimensions.current.baseUnit),
+                    contentAlignment = Alignment.BottomCenter,
                 ) {
-                    BasicText(text = "Config URL")
-                    KamelImage(
-                        lazyPainterResource(data = "https://quickchart.io/qr?size=300&text=${displayFailed.url.encodeURLParameter()}"),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxWidth().background(Color.Yellow),
-                        contentScale = ContentScale.FillWidth,
-                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        BasicText(text = "Config URL")
+                        KamelImage(
+                            lazyPainterResource(data = "https://quickchart.io/qr?size=300&text=${encodeURLParameter()}"),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxWidth().background(Color.Yellow),
+                            contentScale = ContentScale.FillWidth,
+                        )
+                    }
                 }
             }
         }

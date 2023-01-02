@@ -15,10 +15,12 @@ import com.displayer.initKoin
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import io.ktor.server.plugins.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -64,7 +66,7 @@ class Application : CliktCommand() {
                     embeddedServer(CIO, port = port) {
                         routing {
                             get("/config") {
-                                Logger.d("Processing request from ${call.request.origin.remoteHost}")
+                                Logger.d("Processing ${call.request.httpMethod.value} ${call.request.path()} request from ${call.request.origin.remoteHost}")
                                 val secretParam = call.request.queryParameters["secret"]
                                 if (secretParam == secret) {
                                     call.request.queryParameters["url"]?.let { app.loadDisplay(it) }
@@ -72,6 +74,15 @@ class Application : CliktCommand() {
                                     call.respond(HttpStatusCode.OK, "OK")
                                 } else {
                                     call.respond(HttpStatusCode.Unauthorized, "ERROR")
+                                }
+                            }
+                            post("/config/display") {
+                                Logger.d("Processing ${call.request.httpMethod.value} ${call.request.path()} request from ${call.request.origin.remoteHost}")
+                                call.receiveMultipart().forEachPart { part ->
+                                    if (part is PartData.FileItem) {
+                                        app.loadDisplay(part.streamProvider())
+                                    }
+                                    part.dispose
                                 }
                             }
                         }

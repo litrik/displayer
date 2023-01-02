@@ -17,7 +17,7 @@ sealed class DisplayState(
     ) : DisplayState(url, messages)
 
     data class Failure(
-        override val url: String,
+        override val url: String?,
         override val messages: ImmutableList<Message>,
     ) : DisplayState(url, messages)
 

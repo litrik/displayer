@@ -68,6 +68,7 @@ Commands are sent to the app as Android _intents_ with _extras_.
 
 #### Load a display file
 
+Load a remote display file
 ```
 adb shell am start -a "android.intent.action.VIEW" -d "URL_OF_DISPLAY_FILE"
 ```
@@ -98,12 +99,20 @@ Replace YOUR_PORT with a secret that must be included in any request to the admi
 
 #### Load a display file
 
+Load a remote display file
 ```
 curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&url=URL_OF_DISPLAY_FILE"
 ```
 
 Replace URL_OF_DISPLAY_FILE with the URL of your own display file, e.g. https://example.com/displayer.json.
 Make sure you URL-encode all special characters in the URL.
+
+Upload a local display file
+```
+curl -F 'data=@PATH_OF_DISPLAY_FILE' "http://YOUR_HOST:YOUR_PORT/config/display?secret=YOUR_SECRET"
+```
+
+Replace PATH_OF_DISPLAY_FILE with the path of a local display fiel that will be uploaded.
 
 #### Set OpenWeather API key
 

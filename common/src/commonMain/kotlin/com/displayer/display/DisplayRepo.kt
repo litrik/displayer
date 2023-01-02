@@ -22,9 +22,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
 import java.io.File
+import java.io.InputStream
 
 class DisplayRepo(
     private val httpClient: HttpClient,
@@ -47,13 +50,24 @@ class DisplayRepo(
         val actualUrl = url ?: configRepo.getDisplayUrl()
         var actualRefreshDelayInMinutes: Int = refreshDelayInMinutes
         if (actualUrl.isNullOrEmpty()) {
-            Logger.i { "Initializing Displayer with default display" }
-            messages.add(Message(Severity.Info, "Using default display"))
-            val display = parseDisplayFile(com.displayer.display.defaultDisplayFile).andReport(messages)
-            state.value = com.displayer.display.DisplayState.Success(
-                messages = messages.toImmutableList(),
-                display = display,
-            )
+            val rememberedFile = configRepo.getDisplayFile()
+            if (rememberedFile != null) {
+                Logger.i { "Initializing Displayer with remembered display" }
+                val display = parseDisplayFile(rememberedFile).andReport(messages)
+                state.value = com.displayer.display.DisplayState.Success(
+                    messages = messages.toImmutableList(),
+                    display = display,
+                    url = null,
+                )
+            } else {
+                Logger.i { "Initializing Displayer with default display" }
+                messages.add(Message(Severity.Info, "Using default display"))
+                val display = parseDisplayFile(com.displayer.display.defaultDisplayFile).andReport(messages)
+                state.value = com.displayer.display.DisplayState.Success(
+                    messages = messages.toImmutableList(),
+                    display = display,
+                )
+            }
         } else {
             Logger.i { "Initializing Displayer with remembered url $actualUrl " }
             try {
@@ -71,7 +85,7 @@ class DisplayRepo(
                 state.value = com.displayer.display.DisplayState.Success(
                     messages = messages.toImmutableList(),
                     display = display,
-                    url = actualUrl
+                    url = actualUrl,
                 )
             } catch (e: Exception) {
                 Logger.e("Failed to parse the display file", e)
@@ -79,6 +93,27 @@ class DisplayRepo(
                 state.value = com.displayer.display.DisplayState.Failure(actualUrl, messages.toImmutableList())
             }
             scheduleRefresh(actualUrl, actualRefreshDelayInMinutes)
+        }
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    suspend fun loadDisplay(stream: InputStream) {
+        stream.use {
+            val messages = mutableListOf<Message>()
+            try {
+                val file: DisplayFile = json.decodeFromStream(it)
+                val display = parseDisplayFile(file).andReport(messages)
+                configRepo.setDisplayFile(file)
+                state.value = com.displayer.display.DisplayState.Success(
+                    messages = messages.toImmutableList(),
+                    display = display,
+                    url = null,
+                )
+            } catch (e: Exception) {
+                Logger.e("Failed to parse the display file", e)
+                messages.add(Message(Severity.Error, "Failed to parse the display file: ${e.javaClass.simpleName}\n${e.message.orEmpty()}"))
+                state.value = DisplayState.Failure(null, messages.toImmutableList())
+            }
         }
     }
 
