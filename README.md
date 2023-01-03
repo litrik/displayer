@@ -48,8 +48,8 @@ Displayer is being used successfully in the clubhouse of [korfbalclub KCBJ](http
 
 ## Screenshots
 
-![Screenshot](screenshots/screenshot_1.png "Screenshot")
-![Screenshot](screenshots/screenshot_2.png "Screenshot")
+![Screenshot](docs/screenshots/screenshot_1.png "Screenshot")
+![Screenshot](docs/screenshots/screenshot_2.png "Screenshot")
 
 [![Watch screen recording](https://img.youtube.com/vi/r9NUL9Qbw-c/0.jpg)](https://www.youtube.com/watch?v=r9NUL9Qbw-c "Watch screen recording")
 
@@ -75,7 +75,7 @@ Optionally, you can open the project in IntelliJ IDEA (tested with version 2022.
 
 ## Display file structure
 
-There are [sample display files](samples/index.md) available showcasing different features.
+There are [sample display files](docs/samples/index.md) available showcasing different features.
 
 A detailed explanation of the display file structure is coming soon...
 
@@ -116,7 +116,7 @@ Replace YOUR_PORT with a secret that must be included in any request to the admi
 ### Load a remote display file
 
 ```
-curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&url=URL_OF_DISPLAY_FILE"
+curl "http://YOUR_HOST:YOUR_PORT/admin?secret=YOUR_SECRET&url=URL_OF_DISPLAY_FILE"
 ```
 
 Replace URL_OF_DISPLAY_FILE with the URL of your own display file, e.g. https://example.com/displayer.json.
@@ -125,7 +125,7 @@ Make sure you URL-encode all special characters in the URL.
 ### Upload a local display file
 
 ```
-curl -F 'data=@PATH_OF_DISPLAY_FILE' "http://YOUR_HOST:YOUR_PORT/config/display?secret=YOUR_SECRET"
+curl -F 'data=@PATH_OF_DISPLAY_FILE' "http://YOUR_HOST:YOUR_PORT/admin/display?secret=YOUR_SECRET"
 ```
 
 Replace PATH_OF_DISPLAY_FILE with the path of a local display file that will be uploaded.
@@ -133,7 +133,7 @@ Replace PATH_OF_DISPLAY_FILE with the path of a local display file that will be 
 ### Set OpenWeather API key
 
 ```
-curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&open-weather-api-key=YOUR_API_KEY"
+curl "http://YOUR_HOST:YOUR_PORT/admin?secret=YOUR_SECRET&open-weather-api-key=YOUR_API_KEY"
 ```
 
 Replace YOUR_API_KEY with your own OpenWeather API key obtained from the [OpenWeather API console](https://home.openweathermap.org/api_keys).
@@ -141,7 +141,7 @@ Replace YOUR_API_KEY with your own OpenWeather API key obtained from the [OpenWe
 ### Stop the admin server
 
 ```
-curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&kill-server"
+curl "http://YOUR_HOST:YOUR_PORT/admin?secret=YOUR_SECRET&kill-server"
 ```
 
 ## Android intents
@@ -199,7 +199,7 @@ adb shell pm enable com.google.android.tungsten.setupwraith
  * [Ktor](https://ktor.io/): HTTP server
  * [Koin](https://github.com/InsertKoinIO/koin): dependency injection framework
  * [Kamel](https://github.com/alialbaali/Kamel): asynchronous media loading library for Compose
- * [Kamel](https://github.com/russhwolf/multiplatform-settings): Kotlin Multiplatform library to persist key-value data
+ * [Multiplatform settings](https://github.com/russhwolf/multiplatform-settings): Kotlin Multiplatform library to persist key-value data
  * [Kermit](https://github.com/touchlab/Kermit): Kotlin Multiplatform logging
 
 # License

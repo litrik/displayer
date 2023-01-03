@@ -48,7 +48,7 @@ Clock showing time in the nl_BE locale (using a 24-hour time format with a colon
 
 ## Weather
 
-Requires an [OpenWeather API key](../README.md#set-openweather-api-key).
+Requires an [OpenWeather API key](../../README.md#set-openweather-api-key).
 
 ### [weather_betekom_BE.json](weather_betekom_BE.json)
 Live weather data for Betekom, Belgium, showing temperature in degrees Celsius and wind speeds in km/h (in Dutch)
