@@ -53,7 +53,7 @@ class AdminServer(
         Logger.i("Starting admin server on port ${params.port}")
         adminEngine = embeddedServer(CIO, port = params.port) {
             routing {
-                get("/config") {
+                get("/admin") {
                     Logger.d("Processing ${call.request.httpMethod.value} ${call.request.path()} request from ${call.request.origin.remoteHost}")
                     val secretParam = call.request.queryParameters["secret"]
                     if (secretParam == params.secret) {
@@ -67,7 +67,7 @@ class AdminServer(
                         call.respond(HttpStatusCode.Unauthorized, "ERROR")
                     }
                 }
-                post("/config/display") {
+                post("/admin/display") {
                     Logger.d("Processing ${call.request.httpMethod.value} ${call.request.path()} request from ${call.request.origin.remoteHost}")
                     call.receiveMultipart().forEachPart { part ->
                         if (part is PartData.FileItem) {
