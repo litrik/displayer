@@ -22,11 +22,6 @@ kotlin {
                 implementation("com.github.ajalt.clikt:clikt:3.5.0")
 
                 implementation("io.insert-koin:koin-core:" + extra["dep.koin.version"] as String)
-
-                implementation("io.ktor:ktor-server-core:" + extra["dep.ktor.version"] as String)
-                implementation("io.ktor:ktor-server-cio:" + extra["dep.ktor.version"] as String)
-                implementation("org.slf4j:slf4j-nop:1.7.21")
-
             }
         }
         val jvmTest by getting

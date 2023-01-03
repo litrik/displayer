@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import com.displayer.admin.AdminPanel
 import com.displayer.display.DisplayScreen
 import com.displayer.ui.Dimensions
 import com.displayer.ui.LocalDimensions

@@ -3,6 +3,26 @@
 
 An open source multi-platform app for digital signage
 
+ * [Introduction](#introduction)
+ * [Screenshots](#screenshots)
+ * [Build and run](#build-and-run)
+   * [Android](#android)
+   * [Desktop](#desktop)
+ * [Display file structure](#display-file-structure)
+ * [Admin server](#admin-server)
+   * [Start the admin server](#start-the-admin-server)
+   * [Load a remote display file](#load-a-remote-display-file)
+   * [Upload a local display file](#upload-a-local-display-file)
+   * [Set OpenWeather API key](#set-openweather-api-key)
+   * [Stop the admin server](#stop-the-admin-server)
+ * [Android intents](#android-intents)
+   * [Load a remote display file](#load-a-remote-display-file-1)
+   * [Set OpenWeather API key](#set-openweather-api-key-1)
+   * [Stop the admin server](#stop-the-admin-server-1)
+ * [Android TV launcher](#android-tv-launcher)
+ * [Built with](#built-with)
+ * [License](#license)
+
 ## Introduction
 
 The _Displayer_ app shows your content, described in a JSON file, in an endless loop, without any intervention, on the device of your choice.
@@ -59,47 +79,42 @@ There are [sample display files](samples/index.md) available showcasing differen
 
 A detailed explanation of the display file structure is coming soon...
 
-## Send commands
+## Admin server
 
-### Android
+Displayer has a built-in webserver that can be used to send commands and control the app from a remote device.
+This server is accepts commands sent via `curl`, `wget` or any web browser.
 
-On Android, you'll need [ADB](https://developer.android.com/studio/command-line/adb) to send commands to Displayer.
-Commands are sent to the app as Android _intents_ with _extras_.
+The admin server is *not* enabled by default.
 
-#### Load a display file
+### Start the admin server
 
-Load a remote display file
-```
-adb shell am start -a "android.intent.action.VIEW" -d "URL_OF_DISPLAY_FILE"
-```
+#### Android
 
-Replace URL_OF_DISPLAY_FILE with the URL of your own display file, e.g. https://example.com/displayer.json
-
-#### Set OpenWeather API key
+On Android, you'll need [ADB](https://developer.android.com/studio/command-line/adb) to start the admin server with the following command:
 
 ```
-adb shell am start -a "com.displayer.action.CONFIG" -e EXTRA_OPEN_WEATHER_API_KEY YOUR_API_KEY
+adb shell am start -a com.displayer.action.CONFIG -e com.displayer.extra.ADMIN_PORT YOUR_PORT -e com.displayer.extra.ADMIN_SECRET YOUR_SECRET
 ```
 
-Replace YOUR_API_KEY with your own OpenWeather API key obtained from the [OpenWeather API console](https://home.openweathermap.org/api_keys).
-
-### Desktop
-
-On desktop, you must start Displayer with extra parameters to enable the admin endpoint.
-This endpoint is needed to send commands to the app (using `curl`, `wget` or any web browser).
-
-Example:
-```
-/opt/displayer/bin/Displayer --port=YOUR_PORT --secret=YOUR_SECRET
-```
-
-Replace YOUR_PORT with the TCP/IP port number to use for the admin endpoint.
+Replace YOUR_PORT with the TCP/IP port number to use for the admin server.
 
 Replace YOUR_PORT with a secret that must be included in any request to the admin port.
 
-#### Load a display file
+#### Desktop
 
-Load a remote display file
+On desktop, you must start Displayer with extra parameters to enable the admin server.
+
+Example:
+```
+/opt/displayer/bin/Displayer --admin-port=YOUR_PORT --admin-secret=YOUR_SECRET
+```
+
+Replace YOUR_PORT with the TCP/IP port number to use for the admin server.
+
+Replace YOUR_PORT with a secret that must be included in any request to the admin port.
+
+### Load a remote display file
+
 ```
 curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&url=URL_OF_DISPLAY_FILE"
 ```
@@ -107,14 +122,15 @@ curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&url=URL_OF_DISPLAY_FI
 Replace URL_OF_DISPLAY_FILE with the URL of your own display file, e.g. https://example.com/displayer.json.
 Make sure you URL-encode all special characters in the URL.
 
-Upload a local display file
+### Upload a local display file
+
 ```
 curl -F 'data=@PATH_OF_DISPLAY_FILE' "http://YOUR_HOST:YOUR_PORT/config/display?secret=YOUR_SECRET"
 ```
 
-Replace PATH_OF_DISPLAY_FILE with the path of a local display fiel that will be uploaded.
+Replace PATH_OF_DISPLAY_FILE with the path of a local display file that will be uploaded.
 
-#### Set OpenWeather API key
+### Set OpenWeather API key
 
 ```
 curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&open-weather-api-key=YOUR_API_KEY"
@@ -122,7 +138,40 @@ curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&open-weather-api-key=
 
 Replace YOUR_API_KEY with your own OpenWeather API key obtained from the [OpenWeather API console](https://home.openweathermap.org/api_keys).
 
-## Android TV
+### Stop the admin server
+
+```
+curl "http://YOUR_HOST:YOUR_PORT/config?secret=YOUR_SECRET&kill-server"
+```
+
+## Android intents
+
+The Android app also accepts a number of _intents with extras_.
+
+You can use [ADB](https://developer.android.com/studio/command-line/adb) to launch these intents.
+
+### Load a remote display file
+```
+adb shell am start -a android.intent.action.VIEW -d "URL_OF_DISPLAY_FILE"
+```
+
+Replace URL_OF_DISPLAY_FILE with the URL of your own display file, e.g. https://example.com/displayer.json
+
+### Set OpenWeather API key
+
+```
+adb shell am start -a com.displayer.action.CONFIG -e EXTRA_OPEN_WEATHER_API_KEY YOUR_API_KEY
+```
+
+Replace YOUR_API_KEY with your own OpenWeather API key obtained from the [OpenWeather API console](https://home.openweathermap.org/api_keys).
+
+### Stop the admin server
+
+```
+adb shell am start -a com.displayer.action.KILL_SERVER
+```
+
+## Android TV launcher
 
 After installing Displayer on Android TV, you can disable the original Android TV launcher.
 This will make sure that Displayer automatically starts after rebooting your Android TV device.

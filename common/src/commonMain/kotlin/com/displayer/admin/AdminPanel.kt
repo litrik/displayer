@@ -1,4 +1,4 @@
-package com.displayer.app
+package com.displayer.admin
 
 import Strings
 import androidx.compose.foundation.Image
@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.displayer.BuildKonfig
+import com.displayer.app.AppState
 import com.displayer.display.DisplayState
 import com.displayer.platform.formatTime
 import com.displayer.platform.getIcon
@@ -54,6 +55,12 @@ fun AdminPanel(state: AppState) {
             Text("${Strings.adminLabelVersion}: ${BuildKonfig.APP_VERSON_NAME}")
 
             if (state is AppState.Ready) {
+
+                SectionTitle(Strings.adminSectionAdmin.toString())
+                when (state.adminState) {
+                    is AdminState.Running -> Text("${Strings.adminLabelStatus}: ${Strings.adminLabelRunning(state.adminState.port)}")
+                    AdminState.Stopped -> Text("${Strings.adminLabelStatus}: ${Strings.adminLabelStopped}")
+                }
 
                 SectionTitle(Strings.adminSectionWeather.toString())
                 Text("${Strings.adminLabelStatus}: ${getKeyLabel(state.weatherState)}")

@@ -49,6 +49,10 @@
                 <action android:name="com.displayer.action.CONFIG"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.displayer.action.KILL_SERVER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
 
     </application>

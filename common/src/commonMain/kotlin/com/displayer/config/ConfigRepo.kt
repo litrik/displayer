@@ -43,6 +43,15 @@ class ConfigRepo(
 
     fun getDisplayFile(): DisplayFile? = configFlow.value.displayFile
 
+    fun setAdminParameters(params: AdminParameters?) {
+        if (params == null) {
+            Logger.d("Clearing admin parameters")
+        } else {
+            Logger.d("Setting admin parameters: port=${params.port} secret=XXXX")
+        }
+        updateConfig(configFlow.value.copy(adminParameters = params))
+    }
+
     companion object {
         const val KEY_CONFIG = "Displayer.Config"
     }

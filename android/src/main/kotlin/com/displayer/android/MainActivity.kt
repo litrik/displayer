@@ -46,23 +46,20 @@ class MainActivity : ComponentActivity() {
         }
         Logger.i { "Handling intent with action ${intent.action} and data ${intent.data}" }
         when (intent.action) {
-            Intent.ACTION_MAIN -> {
-                lifecycleScope.launchWhenStarted { app.loadDisplay(null) }
-            }
-
-            Intent.ACTION_VIEW -> {
-                lifecycleScope.launchWhenStarted { app.loadDisplay(intent.data?.toString()) }
-            }
-
-            "com.displayer.action.CONFIG" -> {
-                intent.extras?.let { handleConfigIntent(it) }
-            }
+            Intent.ACTION_MAIN -> lifecycleScope.launchWhenStarted { app.loadDisplay(null) }
+            Intent.ACTION_VIEW -> lifecycleScope.launchWhenStarted { app.loadDisplay(intent.data?.toString()) }
+            "com.displayer.action.KILL_SERVER" -> app.stopAdminServer()
+            "com.displayer.action.CONFIG" -> intent.extras?.let { handleConfigIntent(it) }
         }
     }
 
     private fun handleConfigIntent(extras: Bundle) {
         Logger.d { "Handling config intent" }
         extras.getString("com.displayer.extra.OPEN_WEATHER_API_KEY")?.let { app.setOpenWeatherApiKey(it) }
+
+        val extraPort: Int? = extras.getString("com.displayer.extra.ADMIN_PORT")?.toIntOrNull()
+        val extraSecret: String? = extras.getString("com.displayer.extra.ADMIN_SECRET")
+        app.setAdminParameters(extraPort, extraSecret)
     }
 
     private fun hideSystemUI() {

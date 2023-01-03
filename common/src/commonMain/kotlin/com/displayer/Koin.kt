@@ -1,5 +1,6 @@
 package com.displayer
 
+import com.displayer.admin.AdminServer
 import com.displayer.app.App
 import com.displayer.config.ConfigRepo
 import com.displayer.config.ParametersRepo
@@ -57,5 +58,6 @@ val coreModule = module {
     single { ConfigRepo(get(), get()) }
     single { DisplayRepo(get(), get(), get(), get(), get()) }
     single { WeatherRepo(get(), get(), get()) }
-    single { App(get(), get(), get()) }
+    single { App(get(), get(), get(), get()) }
+    single(createdAtStart = true) { AdminServer(get(), get()) }
 }

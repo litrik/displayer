@@ -8,4 +8,11 @@ data class Config(
     val displayUrl: String? = null,
     val displayFile: DisplayFile? = null,
     val openWeatherApiKey: String? = null,
+    val adminParameters: AdminParameters? = null,
+)
+
+@Serializable
+data class AdminParameters(
+    val port: Int,
+    val secret: String,
 )

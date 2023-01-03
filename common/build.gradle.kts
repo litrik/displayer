@@ -51,6 +51,10 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:" + extra["dep.ktor.version"] as String)
                 implementation("io.ktor:ktor-serialization-kotlinx-json:" + extra["dep.ktor.version"] as String)
 
+                implementation("io.ktor:ktor-server-core:" + extra["dep.ktor.version"] as String)
+                implementation("io.ktor:ktor-server-cio:" + extra["dep.ktor.version"] as String)
+                implementation("org.slf4j:slf4j-nop:1.7.21")
+
                 // https://github.com/russhwolf/multiplatform-settings/blob/master/CHANGELOG.md
                 implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0-RC")
 
