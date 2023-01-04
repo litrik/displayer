@@ -82,7 +82,7 @@ A detailed explanation of the display file structure is coming soon...
 ## Admin server
 
 Displayer has a built-in webserver that can be used to send commands and control the app from a remote device.
-This server is accepts commands sent via `curl`, `wget` or any web browser.
+This server accepts commands sent via `curl`, `wget` or any web browser.
 
 The admin server is *not* enabled by default.
 
@@ -98,7 +98,7 @@ adb shell am start -a com.displayer.action.CONFIG -e com.displayer.extra.ADMIN_P
 
 Replace YOUR_PORT with the TCP/IP port number to use for the admin server.
 
-Replace YOUR_PORT with a secret that must be included in any request to the admin port.
+Replace YOUR_SECRET with a secret that must be included in any request to the admin port.
 
 #### Desktop
 
@@ -111,7 +111,7 @@ Example:
 
 Replace YOUR_PORT with the TCP/IP port number to use for the admin server.
 
-Replace YOUR_PORT with a secret that must be included in any request to the admin port.
+Replace YOUR_SECRET with a secret that must be included in any request to the admin port.
 
 ### Load a remote display file
 
