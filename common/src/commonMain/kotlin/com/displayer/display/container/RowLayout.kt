@@ -49,7 +49,7 @@ fun RowLayoutUi(container: RowLayout) {
             val scrollState = rememberScrollState()
             val scrollDistance = LocalDimensions.current.screenWidth
             Row(
-                modifier = Modifier.fillMaxSize().horizontalScroll(scrollState),
+                modifier = Modifier.fillMaxSize().horizontalScroll(state = scrollState, enabled = false),
                 horizontalArrangement = Arrangement.spacedBy(LocalDimensions.current.baseUnit * (container.spacing ?: container.padding.vertical)),
             ) {
                 Spacer(Modifier.width(scrollDistance))
