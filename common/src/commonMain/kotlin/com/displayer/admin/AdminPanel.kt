@@ -21,7 +21,7 @@ import com.displayer.display.DisplayState
 import com.displayer.platform.formatTime
 import com.displayer.platform.getIcon
 import com.displayer.toSp
-import com.displayer.ui.DisplayerPurple
+import com.displayer.ui.DisplayerColor
 import com.displayer.ui.Icon
 import com.displayer.ui.LocalDimensions
 import com.displayer.ui.LocalLocale
@@ -38,7 +38,7 @@ fun AdminPanel(state: AppState) {
             .background(Color.Black),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().background(DisplayerPurple).padding(LocalDimensions.current.baseUnit),
+            modifier = Modifier.fillMaxWidth().background(DisplayerColor).padding(LocalDimensions.current.baseUnit),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = spacedBy(LocalDimensions.current.baseUnit)
         ) {

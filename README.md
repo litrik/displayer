@@ -3,6 +3,8 @@
 
 An open source multi-platform app for digital signage
 
+![Feature graphic](docs/graphics/feature-graphic.png "Feature graphic")
+
  * [Introduction](#introduction)
  * [Screenshots](#screenshots)
  * [Build and run](#build-and-run)
@@ -48,8 +50,8 @@ Displayer is being used successfully in the clubhouse of [korfbalclub KCBJ](http
 
 ## Screenshots
 
-![Screenshot](docs/screenshots/screenshot_1.png "Screenshot")
-![Screenshot](docs/screenshots/screenshot_2.png "Screenshot")
+![Screenshot](docs/screenshots/screenshot-1.png "Screenshot")
+![Screenshot](docs/screenshots/screenshot-2.png "Screenshot")
 
 [![Watch screen recording](https://img.youtube.com/vi/r9NUL9Qbw-c/0.jpg)](https://www.youtube.com/watch?v=r9NUL9Qbw-c "Watch screen recording")
 

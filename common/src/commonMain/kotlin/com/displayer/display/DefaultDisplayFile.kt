@@ -4,6 +4,7 @@ import com.displayer.display.parser.ClockDto
 import com.displayer.display.parser.ColumnDto
 import com.displayer.display.parser.DisplayFile
 import com.displayer.display.parser.ImageDto
+import com.displayer.display.parser.ParametersDto
 import com.displayer.display.parser.RowDto
 import com.displayer.display.parser.ScaleDto
 import com.displayer.display.parser.StackDto
@@ -11,6 +12,10 @@ import com.displayer.display.parser.StyleDto
 import com.displayer.display.parser.TextDto
 
 val defaultDisplayFile = DisplayFile(
+    parameters = ParametersDto(
+        language = "en",
+        country = "BE",
+    ),
     styleId = "light",
     center = StackDto(
         items = listOf(
@@ -42,8 +47,8 @@ val defaultDisplayFile = DisplayFile(
         divider = TextDto("•"),
     ),
     styles = listOf(
-        StyleDto(id = "light", backgroundColor = "#ffffff", contentColor = "#9C27B0"),
-        StyleDto(id = "dark", backgroundColor = "#9C27B0", contentColor = "#ffffff"),
-        StyleDto(id = "darker", backgroundColor = "#4d1358", contentColor = "#ffffff"),
+        StyleDto(id = "light", backgroundColor = "#ffffff", contentColor = "#1E9991"),
+        StyleDto(id = "dark", backgroundColor = "#1E9991", contentColor = "#ffffff"),
+        StyleDto(id = "darker", backgroundColor = "#17756F", contentColor = "#ffffff"),
     )
 )

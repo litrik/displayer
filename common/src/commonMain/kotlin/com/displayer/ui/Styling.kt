@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.displayer.display.Style
 import com.displayer.display.defaultStyle
 
-val DisplayerPurple = Color(156, 39, 176)
+val DisplayerColor = Color(30, 153, 145)
 
 val LocalTextAlign = compositionLocalOf { TextAlign.Left }
 val LocalStyle = compositionLocalOf { defaultStyle }
