@@ -1,11 +1,18 @@
 
 # Displayer
 
+[![License](https://img.shields.io/github/license/litrik/displayer)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Kotlin](https://img.shields.io/badge/kotlin-v1.7.20-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Compose](https://img.shields.io/badge/compose-v1.2.1-blue)](http://kotlinlang.org)
+
 An open source multi-platform app for digital signage
 
 ![Feature graphic](docs/graphics/feature-graphic.png "Feature graphic")
 
+## Table of contents
+
  * [Introduction](#introduction)
+ * [Status](#status)
  * [Screenshots](#screenshots)
  * [Build and run](#build-and-run)
    * [Android](#android)
@@ -47,6 +54,10 @@ Some of its features are:
  * Is a _launcher_ on Android platforms (including Android TV)
 
 Displayer is being used successfully in the clubhouse of [korfbalclub KCBJ](https://www.kcbj.be/) to display information about upcoming events, sponsors, and live weather, without any intervention of the volunteer currently doing bar service.
+
+## Status
+
+This project is currently under heavy development and should be considered _alpha-quality_ at best. 
 
 ## Screenshots
 
