@@ -10,3 +10,7 @@ import kotlinx.datetime.Instant
 expect fun getIcon(icon: Icon): Painter
 
 expect fun formatTime(instant: Instant, locale: Locale): String
+
+expect fun getDefaultCountry() : String
+
+expect fun getDefaultLanguage() : String

@@ -2,6 +2,7 @@ package com.displayer.android.app
 
 import android.app.Application
 import com.displayer.coreModule
+import com.displayer.jvmModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -13,7 +14,7 @@ class DisplayerApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@DisplayerApp)
-            modules(listOf(coreModule))
+            modules(listOf(coreModule, jvmModule))
             androidLogger(Level.INFO)
         }
     }

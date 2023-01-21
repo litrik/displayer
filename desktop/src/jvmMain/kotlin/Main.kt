@@ -10,14 +10,18 @@ import co.touchlab.kermit.Logger
 import com.displayer.app.App
 import com.displayer.app.AppState
 import com.displayer.app.AppUi
-import com.displayer.initKoin
+import com.displayer.coreModule
+import com.displayer.jvmModule
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.core.context.startKoin
 
-private val koin = initKoin().koin
+private val koin = startKoin {
+    modules(coreModule, jvmModule)
+}.koin
 
 class Application : CliktCommand() {
 
@@ -39,7 +43,7 @@ class Application : CliktCommand() {
             app.setOpenWeatherApiKey(it)
         }
         GlobalScope.launch {
-            app.loadDisplay(url)
+            app.loadDisplayFromUrl(url)
         }
         application {
             val display by app.observeState().collectAsState(AppState.Initializing)

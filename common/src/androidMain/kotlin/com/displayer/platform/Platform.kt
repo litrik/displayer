@@ -39,3 +39,7 @@ actual fun formatTime(instant: Instant, locale: Locale): String {
     val df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT, java.util.Locale.forLanguageTag(locale.toLanguageTag()))
     return df.format(Date(instant.toEpochMilliseconds()))
 }
+
+actual fun getDefaultLanguage() = Locale.current.language
+
+actual fun getDefaultCountry() = Locale.current.region

@@ -9,6 +9,7 @@ import com.displayer.ui.Icon
 import com.displayer.weather.api.WeatherDataDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import net.sergeych.sprintf.format
 import kotlin.math.roundToInt
 
 @Serializable
@@ -26,8 +27,8 @@ data class WeatherData(
     fun formatTemperature() = "%d°".format(temperature.roundToInt())
 
     fun formatWindSpeed() = when (units) {
-        Units.Metric -> "%.0f %s".format(windSpeed * 3.6, Strings.windSpeedMetric)
-        Units.Imperial -> "%.0f %s".format(windSpeed, Strings.windSpeedImperial)
+        Units.Metric -> "%d %s".format((windSpeed * 3.6).roundToInt(), Strings.windSpeedMetric)
+        Units.Imperial -> "%d %s".format(windSpeed.roundToInt(), Strings.windSpeedImperial)
     }
 
     val icon: Painter

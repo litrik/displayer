@@ -60,7 +60,7 @@ fun ErrorUi(displayFailed: DisplayState.Failure) {
                         KamelImage(
                             lazyPainterResource(data = "https://quickchart.io/qr?size=300&text=${encodeURLParameter()}"),
                             contentDescription = null,
-                            modifier = Modifier.fillMaxWidth().background(Color.Yellow),
+                            modifier = Modifier.fillMaxWidth(),
                             contentScale = ContentScale.FillWidth,
                         )
                     }

@@ -21,7 +21,7 @@ class ParametersRepo {
         activateLanguage(parameters.language)
     }
 
-    private fun activateLanguage(language: String?) {
+    private fun activateLanguage(language: String) {
         Logger.i("Setting language to $language")
         val i18n4kConfig = I18n4kConfigDefault()
         i18n4k = i18n4kConfig

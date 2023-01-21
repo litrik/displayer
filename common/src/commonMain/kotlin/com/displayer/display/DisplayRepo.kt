@@ -25,9 +25,6 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
-import java.io.File
-import java.io.InputStream
 
 class DisplayRepo(
     private val httpClient: HttpClient,
@@ -42,7 +39,7 @@ class DisplayRepo(
 
     fun observeState(): Flow<DisplayState> = state
 
-    suspend fun loadDisplay(url: String?, refreshDelayInMinutes: Int = 0) {
+    suspend fun loadDisplayFromUrl(url: String?, refreshDelayInMinutes: Int = 0) {
         if (refreshDelayInMinutes == 0) {
             refreshJob?.cancel()
         }
@@ -71,14 +68,8 @@ class DisplayRepo(
         } else {
             Logger.i { "Initializing Displayer with remembered url $actualUrl " }
             try {
-                val file: DisplayFile =
-                    if (actualUrl.startsWith("https")) {
-                        Logger.i { "Loading display from remote url $actualUrl" }
-                        httpClient.get(actualUrl).body()
-                    } else {
-                        Logger.i { "Loading display from local file $actualUrl" }
-                        json.decodeFromString(File(actualUrl).readText())
-                    }
+                Logger.i { "Loading display from remote url $actualUrl" }
+                val file: DisplayFile = httpClient.get(actualUrl).body()
                 val display = parseDisplayFile(file).andReport(messages)
                 configRepo.setDisplayUrl(actualUrl)
                 actualRefreshDelayInMinutes = display.refreshInMinutes
@@ -89,7 +80,7 @@ class DisplayRepo(
                 )
             } catch (e: Exception) {
                 Logger.e("Failed to parse the display file", e)
-                messages.add(Message(Severity.Error, "Failed to parse the display file: ${e.javaClass.simpleName}\n${e.message.orEmpty()}"))
+                messages.add(Message(Severity.Error, "Failed to parse the display file: ${e::class.simpleName}\n${e.message.orEmpty()}"))
                 state.value = DisplayState.Failure(actualUrl, messages.toImmutableList())
             }
             scheduleRefresh(actualUrl, actualRefreshDelayInMinutes)
@@ -97,23 +88,21 @@ class DisplayRepo(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    fun loadDisplay(stream: InputStream) {
-        stream.use {
-            val messages = mutableListOf<Message>()
-            try {
-                val file: DisplayFile = json.decodeFromStream(it)
-                val display = parseDisplayFile(file).andReport(messages)
-                configRepo.setDisplayFile(file)
-                state.value = DisplayState.Success(
-                    messages = messages.toImmutableList(),
-                    display = display,
-                    url = null,
-                )
-            } catch (e: Exception) {
-                Logger.e("Failed to parse the display file", e)
-                messages.add(Message(Severity.Error, "Failed to parse the display file: ${e.javaClass.simpleName}\n${e.message.orEmpty()}"))
-                state.value = DisplayState.Failure(null, messages.toImmutableList())
-            }
+    fun loadDisplayFromJsonString(str: String) {
+        val messages = mutableListOf<Message>()
+        try {
+            val file: DisplayFile = json.decodeFromString(str)
+            val display = parseDisplayFile(file).andReport(messages)
+            configRepo.setDisplayFile(file)
+            state.value = DisplayState.Success(
+                messages = messages.toImmutableList(),
+                display = display,
+                url = null,
+            )
+        } catch (e: Exception) {
+            Logger.e("Failed to parse the display file", e)
+            messages.add(Message(Severity.Error, "Failed to parse the display file: ${e::class.simpleName}\n${e.message.orEmpty()}"))
+            state.value = DisplayState.Failure(null, messages.toImmutableList())
         }
     }
 
@@ -124,7 +113,7 @@ class DisplayRepo(
             refreshJob = GlobalScope.launch(Dispatchers.Unconfined) {
                 delay(delayInMinutes * 60_000L)
                 Logger.d("Refreshing display")
-                loadDisplay(url, delayInMinutes)
+                loadDisplayFromUrl(url, delayInMinutes)
             }
         }
     }

@@ -46,8 +46,8 @@ class MainActivity : ComponentActivity() {
         }
         Logger.i { "Handling intent with action ${intent.action} and data ${intent.data}" }
         when (intent.action) {
-            Intent.ACTION_MAIN -> lifecycleScope.launchWhenStarted { app.loadDisplay(null) }
-            Intent.ACTION_VIEW -> lifecycleScope.launchWhenStarted { app.loadDisplay(intent.data?.toString()) }
+            Intent.ACTION_MAIN -> lifecycleScope.launchWhenStarted { app.loadDisplayFromUrl(null) }
+            Intent.ACTION_VIEW -> lifecycleScope.launchWhenStarted { app.loadDisplayFromUrl(intent.data?.toString()) }
             "com.displayer.action.KILL_SERVER" -> app.stopAdminServer()
             "com.displayer.action.CONFIG" -> intent.extras?.let { handleConfigIntent(it) }
         }

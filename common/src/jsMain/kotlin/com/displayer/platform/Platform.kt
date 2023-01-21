@@ -2,15 +2,14 @@ package com.displayer.platform
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.intl.Locale
 import com.displayer.ui.Icon
+import io.kamel.core.getOrNull
+import io.kamel.image.lazyPainterResource
 import kotlinx.datetime.Instant
-import java.text.SimpleDateFormat
-import java.util.*
 
 @Composable
-actual fun getIcon(icon: Icon): Painter = painterResource(
+actual fun getIcon(icon: Icon): Painter = lazyPainterResource(data =
     when (icon) {
         Icon.Empty -> ""
         Icon.Logo -> "logo_white.svg"
@@ -32,13 +31,12 @@ actual fun getIcon(icon: Icon): Painter = painterResource(
         Icon.YouTubeLight -> "social_youtube_light.png"
         Icon.Snapchat -> "social_snapchat.png"
     }
-)
+).getOrNull()!!
 
 actual fun formatTime(instant: Instant, locale : Locale): String {
-    val df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT, java.util.Locale.forLanguageTag(locale.toLanguageTag()))
-    return df.format(Date(instant.toEpochMilliseconds()))
+    return "FIXME"
 }
 
-actual fun getDefaultLanguage() = Locale.current.language
+actual fun getDefaultCountry() = "en"
 
-actual fun getDefaultCountry() = Locale.current.region
+actual fun getDefaultLanguage() = "US"

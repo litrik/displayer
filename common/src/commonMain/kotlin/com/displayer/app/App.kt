@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import java.io.InputStream
 
 class App(
     private val configRepo: ConfigRepo,
@@ -43,9 +42,7 @@ class App(
 
     fun setOpenWeatherApiKey(apiKey: String) = configRepo.setOpenWeatherApiKey(apiKey)
 
-    suspend fun loadDisplay(url: String?) = displayRepo.loadDisplay(url)
-
-    suspend fun loadDisplay(stream: InputStream) = displayRepo.loadDisplay(stream)
+    suspend fun loadDisplayFromUrl(url: String?) = displayRepo.loadDisplayFromUrl(url)
 
     fun setAdminParameters(port: Int?, secret: String?) {
         if (port == null) {

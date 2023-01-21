@@ -1,6 +1,7 @@
 package com.displayer.display.parser
 
-import androidx.compose.ui.text.intl.Locale
+import com.displayer.platform.getDefaultCountry
+import com.displayer.platform.getDefaultLanguage
 import com.displayer.weather.WeatherData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -153,8 +154,8 @@ data class PaddingDto(
 @Serializable
 data class ParametersDto(
     val refreshInMinutes: Int = 0,
-    val language: String = Locale.current.language, // ISO 639-1
-    val country: String = Locale.current.region, // ISO 3166
+    val language: String = getDefaultLanguage(), // ISO 639-1
+    val country: String = getDefaultCountry(), // ISO 3166
     val zip: String? = null,
     val units: Units? = null,
 )
