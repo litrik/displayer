@@ -9,6 +9,8 @@ import com.displayer.display.parser.Message
 import com.displayer.display.parser.Parser
 import com.displayer.display.parser.Result
 import com.displayer.display.parser.Severity
+import com.displayer.platform.getDisplayCachePath
+import com.displayer.platform.getFilesystem
 import com.displayer.weather.WeatherRepo
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -24,7 +26,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import okio.buffer
+import okio.use
 
 class DisplayRepo(
     private val httpClient: HttpClient,
@@ -47,7 +52,7 @@ class DisplayRepo(
         val actualUrl = url ?: configRepo.getDisplayUrl()
         var actualRefreshDelayInMinutes: Int = refreshDelayInMinutes
         if (actualUrl.isNullOrEmpty()) {
-            val rememberedFile = configRepo.getDisplayFile()
+            val rememberedFile = loadDisplayFile()
             if (rememberedFile != null) {
                 Logger.i { "Initializing Displayer with remembered display" }
                 val display = parseDisplayFile(rememberedFile).andReport(messages)
@@ -72,6 +77,7 @@ class DisplayRepo(
                 val file: DisplayFile = httpClient.get(actualUrl).body()
                 val display = parseDisplayFile(file).andReport(messages)
                 configRepo.setDisplayUrl(actualUrl)
+                saveDisplayFile(file)
                 actualRefreshDelayInMinutes = display.refreshInMinutes
                 state.value = DisplayState.Success(
                     messages = messages.toImmutableList(),
@@ -79,12 +85,49 @@ class DisplayRepo(
                     url = actualUrl,
                 )
             } catch (e: Exception) {
-                Logger.e("Failed to parse the display file", e)
+                Logger.e("Failed to load the display file", e)
                 messages.add(Message(Severity.Error, "Failed to parse the display file: ${e::class.simpleName}\n${e.message.orEmpty()}"))
-                state.value = DisplayState.Failure(actualUrl, messages.toImmutableList())
+                val rememberedFile = loadDisplayFile()
+                if (rememberedFile != null) {
+                    Logger.i { "Falling back to remembered display" }
+                    val display = parseDisplayFile(rememberedFile).andReport(messages)
+                    state.value = DisplayState.Success(
+                        messages = messages.toImmutableList(),
+                        display = display,
+                        url = null,
+                    )
+                } else {
+                    state.value = DisplayState.Failure(actualUrl, messages.toImmutableList())
+                }
             }
             scheduleRefresh(actualUrl, actualRefreshDelayInMinutes)
         }
+    }
+
+    private fun saveDisplayFile(file: DisplayFile) {
+        Logger.d("Saving display file to cache")
+        try {
+            val s = json.encodeToString(file)
+            getFilesystem().sink(getDisplayCachePath()).buffer().use { sink ->
+                sink.writeUtf8(s)
+                sink.flush()
+            }
+        } catch (e: Exception) {
+            Logger.e("Failed to save display file to cache", e)
+        }
+    }
+
+    private fun loadDisplayFile(): DisplayFile? {
+        Logger.d("Loading display file from cache")
+        try {
+            getFilesystem().source(getDisplayCachePath()).use { source ->
+                val s = source.buffer().readByteString().utf8()
+                return json.decodeFromString<DisplayFile>(s)
+            }
+        } catch (e: Exception) {
+            Logger.e("Failed to load display file from cache", e)
+        }
+        return null
     }
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -93,7 +136,7 @@ class DisplayRepo(
         try {
             val file: DisplayFile = json.decodeFromString(str)
             val display = parseDisplayFile(file).andReport(messages)
-            configRepo.setDisplayFile(file)
+            saveDisplayFile(file)
             state.value = DisplayState.Success(
                 messages = messages.toImmutableList(),
                 display = display,

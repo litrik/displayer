@@ -75,6 +75,9 @@ kotlin {
 
                 // https://github.com/sergeych/mp_stools/releases
                 implementation("net.sergeych:mp_stools:1.2.2")
+
+                // https://square.github.io/okio/changelog/
+                implementation("com.squareup.okio:okio:" + extra["dep.okio.version"] as String)
             }
         }
         val commonTest by getting {
@@ -126,6 +129,10 @@ kotlin {
 
                 // https://github.com/ktorio/ktor/blob/main/CHANGELOG.md
                 implementation("io.ktor:ktor-client-js:" + extra["dep.ktor.version"] as String)
+
+                // https://square.github.io/okio/changelog/
+                implementation("com.squareup.okio:okio-nodefilesystem:" + extra["dep.okio.version"] as String)
+
             }
         }
     }

@@ -7,6 +7,10 @@ import com.displayer.ui.Icon
 import io.kamel.core.getOrNull
 import io.kamel.image.lazyPainterResource
 import kotlinx.datetime.Instant
+import okio.FileSystem
+import okio.NodeJsFileSystem
+import okio.Path
+import okio.Path.Companion.toPath
 
 @Composable
 actual fun getIcon(icon: Icon): Painter = lazyPainterResource(data =
@@ -40,3 +44,7 @@ actual fun formatTime(instant: Instant, locale : Locale): String {
 actual fun getDefaultCountry() = "en"
 
 actual fun getDefaultLanguage() = "US"
+
+actual fun getFilesystem() : FileSystem = NodeJsFileSystem
+
+actual fun getDisplayCachePath(): Path = "display-cache.json".toPath()

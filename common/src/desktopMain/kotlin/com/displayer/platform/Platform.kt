@@ -6,6 +6,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.intl.Locale
 import com.displayer.ui.Icon
 import kotlinx.datetime.Instant
+import okio.FileSystem
+import okio.Path
+import okio.Path.Companion.toPath
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,7 +38,7 @@ actual fun getIcon(icon: Icon): Painter = painterResource(
     }
 )
 
-actual fun formatTime(instant: Instant, locale : Locale): String {
+actual fun formatTime(instant: Instant, locale: Locale): String {
     val df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT, java.util.Locale.forLanguageTag(locale.toLanguageTag()))
     return df.format(Date(instant.toEpochMilliseconds()))
 }
@@ -42,3 +46,7 @@ actual fun formatTime(instant: Instant, locale : Locale): String {
 actual fun getDefaultLanguage() = Locale.current.language
 
 actual fun getDefaultCountry() = Locale.current.region
+
+actual fun getFilesystem(): FileSystem = FileSystem.SYSTEM
+
+actual fun getDisplayCachePath(): Path = File(File(".cache").also { it.mkdirs() }, "/display-cache.json").absolutePath.toPath()

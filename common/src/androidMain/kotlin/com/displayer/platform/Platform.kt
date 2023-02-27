@@ -1,5 +1,6 @@
 package com.displayer.platform
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
@@ -7,6 +8,11 @@ import androidx.compose.ui.text.intl.Locale
 import com.displayer.R
 import com.displayer.ui.Icon
 import kotlinx.datetime.Instant
+import okio.FileSystem
+import okio.Path
+import okio.Path.Companion.toPath
+import org.koin.java.KoinJavaComponent.get
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,3 +49,7 @@ actual fun formatTime(instant: Instant, locale: Locale): String {
 actual fun getDefaultLanguage() = Locale.current.language
 
 actual fun getDefaultCountry() = Locale.current.region
+
+actual fun getFilesystem(): FileSystem = FileSystem.SYSTEM
+
+actual fun getDisplayCachePath(): Path = File(get<Context>(Context::class.java).cacheDir,"display-cache.json").absolutePath.toPath()
