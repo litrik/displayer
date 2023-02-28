@@ -38,7 +38,7 @@ data class RowLayout(
     companion object {
         val DEFAULT_PADDING_SCROLLING: Padding = Padding(0f, 1f)
         val DEFAULT_PADDING_STATIC: Padding = Padding(1f, 1f)
-        const val DEFAULT_SCROLL_SPEED: Float = 8f
+        const val DEFAULT_SCROLL_SPEED: Float = 12f
     }
 }
 
