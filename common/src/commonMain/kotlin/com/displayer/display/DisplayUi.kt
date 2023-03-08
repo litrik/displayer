@@ -9,7 +9,7 @@ fun DisplayScreen(state: DisplayState) {
         when (it) {
             is DisplayState.Success -> MainUi(it.display)
             is DisplayState.Failure -> ErrorUi(it)
-            DisplayState.NoDisplay -> {}
+            is DisplayState.NoDisplay -> {}
         }
     }
 }

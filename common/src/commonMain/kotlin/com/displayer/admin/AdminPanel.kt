@@ -11,10 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import com.displayer.BuildKonfig
 import com.displayer.app.AppState
 import com.displayer.display.DisplayState
@@ -25,6 +27,7 @@ import com.displayer.ui.DisplayerColor
 import com.displayer.ui.Icon
 import com.displayer.ui.LocalDimensions
 import com.displayer.ui.LocalLocale
+import com.displayer.ui.LocalStyle
 import com.displayer.ui.Message
 import com.displayer.ui.Text
 import com.displayer.weather.WeatherState
@@ -47,7 +50,7 @@ fun AdminPanel(state: AppState) {
         }
         Column(
             Modifier.padding(LocalDimensions.current.baseUnit),
-            verticalArrangement = spacedBy(LocalDimensions.current.baseUnit)
+            verticalArrangement = spacedBy(LocalDimensions.current.baseUnit * 0.5f)
         ) {
 
             SectionTitle(Strings.adminSectionApp.toString())
@@ -68,6 +71,7 @@ fun AdminPanel(state: AppState) {
                 if (state.displayState !is DisplayState.NoDisplay) {
 
                     SectionTitle(Strings.adminSectionDisplay.toString())
+                    Text("${Strings.adminLabelStatus}: ${getKeyLabel(state.displayState)}")
                     state.displayState.url?.run { Text("${Strings.adminLabelUrl}: $this") }
                     Column {
                         state.displayState.messages.onEach {
@@ -86,12 +90,24 @@ fun AdminPanel(state: AppState) {
 fun getKeyLabel(state: WeatherState): String = when (state) {
     is WeatherState.ApiKeyInvalid -> Strings.adminWeatherApiKeyInvalid.toString()
     WeatherState.ApiKeyNotSet -> Strings.adminWeatherApiKeyNotSet.toString()
-    is WeatherState.Failure -> "${Strings.adminWeatherFailure} (${formatTime(state.instant, LocalLocale.current)})"
-    is WeatherState.Success -> "${Strings.adminWeatherSuccess} (${formatTime(state.instant, LocalLocale.current)})"
+    is WeatherState.Failure -> "${Strings.adminStatusFailure} (${formatTime(state.instant, LocalLocale.current)})"
+    is WeatherState.Success -> "${Strings.adminStatusSuccess} (${formatTime(state.instant, LocalLocale.current)})"
+}
+
+@Composable
+fun getKeyLabel(state: DisplayState): String = when (state) {
+    is DisplayState.NoDisplay -> ""
+    is DisplayState.Failure -> "${Strings.adminStatusFailure} (${formatTime(state.instant, LocalLocale.current)})"
+    is DisplayState.Success -> "${Strings.adminStatusSuccess} (${formatTime(state.instant, LocalLocale.current)})"
 }
 
 @Composable
 fun SectionTitle(text: String) {
-    Text(text, style = TextStyle.Default.copy(fontSize = LocalDimensions.current.fontSizeSmall.toSp()))
+    CompositionLocalProvider(LocalStyle provides LocalStyle.current.copy(contentColor = DisplayerColor)) {
+        Text(
+            text = text,
+            style = TextStyle.Default.copy(fontSize = LocalDimensions.current.fontSizeSmall.toSp(), fontWeight = FontWeight.Bold),
+        )
+    }
 }
 

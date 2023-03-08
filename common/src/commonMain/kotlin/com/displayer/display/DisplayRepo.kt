@@ -39,7 +39,7 @@ class DisplayRepo(
     private val json: Json,
 ) {
 
-    private val state = MutableStateFlow<DisplayState>(DisplayState.NoDisplay)
+    private val state = MutableStateFlow<DisplayState>(DisplayState.NoDisplay())
     private var refreshJob: Job? = null
 
     fun observeState(): Flow<DisplayState> = state
