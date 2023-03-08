@@ -1,6 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter;
 
 plugins {
     kotlin("multiplatform")
@@ -22,6 +24,7 @@ buildkonfig {
     packageName = "com.displayer"
     defaultConfigs {
         buildConfigField(STRING, "APP_VERSON_NAME", extra["app.versionName"] as String)
+        buildConfigField(STRING, "BUILD_TIME", DateTimeFormatter.ISO_INSTANT.format(OffsetDateTime.now()) as String)
     }
 }
 

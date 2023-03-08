@@ -55,7 +55,7 @@ fun AdminPanel(state: AppState) {
 
             SectionTitle(Strings.adminSectionApp.toString())
 
-            Text("${Strings.adminLabelVersion}: ${BuildKonfig.APP_VERSON_NAME}")
+            Text("${Strings.adminLabelVersion}: ${BuildKonfig.APP_VERSON_NAME} (${BuildKonfig.BUILD_TIME})")
 
             if (state is AppState.Ready) {
 
