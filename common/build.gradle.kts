@@ -65,7 +65,7 @@ kotlin {
                 implementation("io.ktor:ktor-serialization-kotlinx-json:" + extra["dep.ktor.version"] as String)
 
                 // https://github.com/russhwolf/multiplatform-settings/blob/master/CHANGELOG.md
-                implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0-RC")
+                implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0")
 
                 // https://github.com/InsertKoinIO/koin/blob/main/CHANGELOG.md
                 implementation("io.insert-koin:koin-core:" + extra["dep.koin.version"] as String)
