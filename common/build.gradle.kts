@@ -51,7 +51,7 @@ kotlin {
                 api(compose.foundation)
 
                 // https://github.com/Kotlin/kotlinx.serialization/blob/master/CHANGELOG.md
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
                 // https://github.com/Kotlin/kotlinx.collections.immutable/blob/master/CHANGELOG.md
                 implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
                 // https://github.com/Kotlin/kotlinx-datetime/blob/master/CHANGELOG.md
