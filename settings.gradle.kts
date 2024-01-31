@@ -7,12 +7,12 @@ pluginManagement {
     }
 
     plugins {
-        kotlin("multiplatform").version(extra["dep.kotlin.version"] as String)
-        kotlin("plugin.serialization").version(extra["dep.kotlin.version"] as String)
-        kotlin("android").version(extra["dep.kotlin.version"] as String)
-        id("com.android.application").version(extra["dep.agp.version"] as String)
-        id("com.android.library").version(extra["dep.agp.version"] as String)
-        id("org.jetbrains.compose").version(extra["dep.compose.version"] as String)
+        kotlin("multiplatform").version("1.8.20")
+        kotlin("plugin.serialization").version("1.8.20")
+        kotlin("android").version("1.8.20")
+        id("com.android.application").version("7.4.2")
+        id("com.android.library").version("7.4.2")
+        id("org.jetbrains.compose").version("1.4.0")
     }
 }
 

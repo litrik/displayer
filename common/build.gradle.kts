@@ -50,37 +50,26 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
 
-                // https://github.com/Kotlin/kotlinx.serialization/blob/master/CHANGELOG.md
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-                // https://github.com/Kotlin/kotlinx.collections.immutable/blob/master/CHANGELOG.md
-                implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
-                // https://github.com/Kotlin/kotlinx-datetime/blob/master/CHANGELOG.md
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.kotlinx.collections.immutable)
+                implementation(libs.kotlinx.datetime)
 
-                // https://github.com/alialbaali/Kamel/pull/23
-                implementation("io.github.luca992.com.alialbaali.kamel:kamel-image:0.5-darwinandjs0")
+                implementation(libs.kamel.image)
 
-                // https://github.com/ktorio/ktor/blob/main/CHANGELOG.md
-                implementation("io.ktor:ktor-client-content-negotiation:" + extra["dep.ktor.version"] as String)
-                implementation("io.ktor:ktor-serialization-kotlinx-json:" + extra["dep.ktor.version"] as String)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
 
-                // https://github.com/russhwolf/multiplatform-settings/blob/master/CHANGELOG.md
-                implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0")
+                implementation(libs.multiplatform.settings.no.arg)
 
-                // https://github.com/InsertKoinIO/koin/blob/main/CHANGELOG.md
-                implementation("io.insert-koin:koin-core:" + extra["dep.koin.version"] as String)
+                implementation(libs.koin.core)
 
-                // https://github.com/touchlab/Kermit/releases
-                api("co.touchlab:kermit:1.2.2")
+                api(libs.kermit)
 
-                // https://github.com/comahe-de/i18n4k/releases
-                implementation("de.comahe.i18n4k:i18n4k-core:0.5.0")
+                implementation(libs.i18n4k.core)
 
-                // https://github.com/sergeych/mp_stools/releases
-                implementation("net.sergeych:mp_stools:1.2.2")
+                implementation(libs.mp.stools)
 
-                // https://square.github.io/okio/changelog/
-                implementation("com.squareup.okio:okio:" + extra["dep.okio.version"] as String)
+                implementation(libs.okio)
             }
         }
         val commonTest by getting {
@@ -91,51 +80,35 @@ kotlin {
         val androidMain by getting {
             kotlin.srcDirs("src/jvmMain/kotlin")
             dependencies {
-                // https://github.com/InsertKoinIO/koin/blob/main/CHANGELOG.md
-                api("io.insert-koin:koin-android:" + extra["dep.koin.version"] as String)
-
-                // https://github.com/ktorio/ktor/blob/main/CHANGELOG.md
-                implementation("io.ktor:ktor-client-cio:" + extra["dep.ktor.version"] as String)
-
-                implementation("io.ktor:ktor-server-core:" + extra["dep.ktor.version"] as String)
-                implementation("io.ktor:ktor-server-cio:" + extra["dep.ktor.version"] as String)
-                implementation("org.slf4j:slf4j-nop:1.7.21")
-
+                api(libs.koin.android)
+                implementation(libs.ktor.client.cio)
+                implementation(libs.ktor.server.core)
+                implementation(libs.ktor.server.cio)
+                implementation(libs.slf4j.slf4j.nop)
             }
         }
         val androidTest by getting {
             dependencies {
-                implementation("junit:junit:4.13.2")
+                implementation(libs.junit)
             }
         }
         val desktopMain by getting {
             kotlin.srcDirs("src/jvmMain/kotlin")
             dependencies {
                 api(compose.preview)
-
-                // https://github.com/ktorio/ktor/blob/main/CHANGELOG.md
-                implementation("io.ktor:ktor-client-cio:" + extra["dep.ktor.version"] as String)
-
-                implementation("io.ktor:ktor-server-core:" + extra["dep.ktor.version"] as String)
-                implementation("io.ktor:ktor-server-cio:" + extra["dep.ktor.version"] as String)
-                implementation("org.slf4j:slf4j-nop:1.7.21")
-
+                implementation(libs.ktor.client.cio)
+                implementation(libs.ktor.server.core)
+                implementation(libs.ktor.server.cio)
+                implementation(libs.slf4j.slf4j.nop)
             }
         }
         val desktopTest by getting
         val jsMain by getting {
             dependencies {
                 implementation(compose.web.core)
-
-                // https://github.com/comahe-de/i18n4k/releases
-                implementation("de.comahe.i18n4k:i18n4k-core-js:" + extra["dep.i18n4k.version"] as String)
-
-                // https://github.com/ktorio/ktor/blob/main/CHANGELOG.md
-                implementation("io.ktor:ktor-client-js:" + extra["dep.ktor.version"] as String)
-
-                // https://square.github.io/okio/changelog/
-                implementation("com.squareup.okio:okio-nodefilesystem:" + extra["dep.okio.version"] as String)
-
+                implementation(libs.i18n4k.core.js)
+                implementation(libs.ktor.client.js)
+                implementation(libs.okio.nodefilesystem)
             }
         }
     }
@@ -191,5 +164,5 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 dependencies {
-    implementation("androidx.compose.ui:ui:1.3.2")
+    implementation(libs.compose.ui)
 }

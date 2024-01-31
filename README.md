@@ -72,7 +72,7 @@ There are currently no binary builds available. You have to download/clone the s
 
 Building Displayer requires at minimum Java 17.
 
-Optionally, you can open the project in IntelliJ IDEA (tested with version 2022.3.1 of the Community Edition running on Java 17)
+Optionally, you can open the project in IntelliJ IDEA (tested with version 2023.3.3 of the Community Edition running on Java 17)
 
 ### Android
 

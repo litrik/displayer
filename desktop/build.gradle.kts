@@ -17,11 +17,8 @@ kotlin {
             dependencies {
                 implementation(project(":common"))
                 implementation(compose.desktop.currentOs)
-
-                // https://ajalt.github.io/clikt/changelog/
-                implementation("com.github.ajalt.clikt:clikt:3.5.0")
-
-                implementation("io.insert-koin:koin-core:" + extra["dep.koin.version"] as String)
+                implementation(libs.clikt)
+                implementation(libs.koin.core)
             }
         }
         val jvmTest by getting
