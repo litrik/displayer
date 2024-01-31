@@ -18,4 +18,6 @@ pluginManagement {
 
 rootProject.name = "Displayer"
 
-include(":android", ":desktop", ":common")
+include(":android")
+include(":desktop")
+include(":common")

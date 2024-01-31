@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.displayer"
-version = extra["app.versionName"] as String
+version = "0.1"
 
 i18n4k {
     sourceCodeLocales = listOf("en", "nl")
@@ -23,7 +23,7 @@ i18n4k {
 buildkonfig {
     packageName = "com.displayer"
     defaultConfigs {
-        buildConfigField(STRING, "APP_VERSON_NAME", extra["app.versionName"] as String)
+        buildConfigField(STRING, "APP_VERSON_NAME", version as String)
         buildConfigField(STRING, "BUILD_TIME", DateTimeFormatter.ISO_INSTANT.format(OffsetDateTime.now()) as String)
     }
 }
@@ -117,11 +117,10 @@ kotlin {
 android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
-    compileSdk = (extra["app.compileSdk"] as String).toInt()
+    compileSdk = AndroidSdk.compile
 
     defaultConfig {
-        minSdk = (extra["app.minSdk"] as String).toInt()
-        targetSdk = (extra["app.targetSdk"] as String).toInt()
+        minSdk = AndroidSdk.min
     }
 
     compileOptions {

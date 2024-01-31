@@ -12,25 +12,22 @@ repositories {
 
 dependencies {
     implementation(project(":common"))
-
-    // https://developer.android.com/jetpack/androidx/releases/activity
-    implementation("androidx.activity:activity-compose:1.6.1")
-
+    implementation(libs.androidx.activity.compose)
 }
 
 fun isBuildServer() = System.getenv().containsKey("CI") || System.getenv().containsKey("BUILD_NUMBER")
 
 android {
 
-    compileSdk = (extra["app.compileSdk"] as String).toInt()
+    compileSdk = AndroidSdk.compile
 
     defaultConfig {
         applicationId = "com.displayer"
         namespace = "com.displayer.android"
-        minSdk = (extra["app.minSdk"] as String).toInt()
-        targetSdk = (extra["app.targetSdk"] as String).toInt()
-        versionCode = (extra["app.versionCode"] as String).toInt()
-        versionName = extra["app.versionName"] as String
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
+        versionCode = 1
+        versionName = "0.1"
 
         resourceConfigurations += "en"
 
