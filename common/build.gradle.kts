@@ -9,7 +9,7 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     id("com.android.library")
-    id("de.comahe.i18n4k") version "0.5.0"
+    id("de.comahe.i18n4k") version "0.7.0"
     id("com.codingfeline.buildkonfig") version "0.13.3"
 }
 
@@ -31,17 +31,6 @@ buildkonfig {
 kotlin {
     android()
     jvm("desktop")
-    js(IR) {
-        browser{
-            runTask {
-                outputFileName = "displayer.js"
-            }
-            webpackTask {
-                outputFileName = "displayer.js"
-            }
-        }
-        binaries.executable()
-    }
 
     sourceSets {
         val commonMain by getting {
@@ -87,7 +76,7 @@ kotlin {
                 implementation(libs.slf4j.slf4j.nop)
             }
         }
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(libs.junit)
             }
@@ -103,14 +92,6 @@ kotlin {
             }
         }
         val desktopTest by getting
-        val jsMain by getting {
-            dependencies {
-                implementation(compose.web.core)
-                implementation(libs.i18n4k.core.js)
-                implementation(libs.ktor.client.js)
-                implementation(libs.okio.nodefilesystem)
-            }
-        }
     }
 }
 
@@ -121,6 +102,7 @@ android {
 
     defaultConfig {
         minSdk = AndroidSdk.min
+        namespace = "com.displayer"
     }
 
     compileOptions {
@@ -131,22 +113,6 @@ android {
     buildFeatures {
         buildConfig = true
     }
-}
-
-// a temporary workaround for a bug in jsRun invocation - see https://youtrack.jetbrains.com/issue/KT-48273
-afterEvaluate {
-    rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension> {
-        versions.webpackDevServer.version = "4.0.0"
-        versions.webpackCli.version = "4.9.0"
-        nodeVersion = "16.0.0"
-    }
-}
-
-// TODO: remove when https://youtrack.jetbrains.com/issue/KT-50778 fixed
-project.tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile::class.java).configureEach {
-    kotlinOptions.freeCompilerArgs += listOf(
-        "-Xir-dce-runtime-diagnostic=log"
-    )
 }
 
 compose.experimental {
